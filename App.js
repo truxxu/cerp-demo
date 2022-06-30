@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Home, Login, Register, Settings, Welcome} from './src/screens';
-import {fonts, colors} from './src/styles/base.js';
+import {colors} from './src/styles/base.js';
 
 const Stack = createNativeStackNavigator();
 const headerOptions = {
@@ -24,7 +24,7 @@ const App = () => {
         <Stack.Screen
           name="register"
           component={Register}
-          options={{title: 'Register'}}
+          options={{title: ''}}
         />
         <Stack.Screen name="login" component={Login} options={{title: ''}} />
         <Stack.Screen name="home" component={Home} options={{title: 'home'}} />

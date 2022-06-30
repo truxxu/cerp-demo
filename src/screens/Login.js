@@ -1,14 +1,24 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 
 import {ScreenTemplate} from '../atoms';
+import {fonts, colors} from '../styles/base.js';
 
-const Login = () => {
+const Login = ({navigation}) => {
   return (
-    <ScreenTemplate>
-      <Text>Login</Text>
+    <ScreenTemplate center>
+      <Text style={styles.text}>Login</Text>
     </ScreenTemplate>
   );
 };
 
 export {Login};
+
+const styles = StyleSheet.create({
+  text: {
+    textAlign: 'center',
+    color: colors.primary,
+    fontSize: fonts.xl,
+    fontFamily: fonts.primary,
+  },
+});

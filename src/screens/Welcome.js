@@ -1,17 +1,16 @@
 import React from 'react';
-import {Text, StyleSheet, Button} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 
 import {ScreenTemplate} from '../atoms';
 import {fonts, colors} from '../styles/base.js';
+import {Button} from '../atoms';
 
 const Welcome = ({navigation}) => {
   return (
     <ScreenTemplate center>
       <Text style={styles.text}>Welcome</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('login')}
-      />
+      <Button label="Login" action={() => navigation.navigate('login')} />
+      <Button label="Register" action={() => navigation.navigate('register')} />
     </ScreenTemplate>
   );
 };
