@@ -7,9 +7,11 @@ import {colors} from './src/styles/base.js';
 
 const Stack = createNativeStackNavigator();
 const headerOptions = {
+  headerStyle: {
+    backgroundColor: colors.secondary,
+  },
   headerTintColor: colors.primary,
   headerShadowVisible: false,
-  headerTransparent: true,
 };
 
 const App = () => {
