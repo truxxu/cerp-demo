@@ -1,16 +1,24 @@
-import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {Image, StyleSheet} from 'react-native';
 
 import {ScreenTemplate} from '../atoms';
-import {fonts, colors} from '../styles/base.js';
-import {Button} from '../atoms';
+
+import Logo from './../images/logo.png';
 
 const Welcome = ({navigation}) => {
+  useEffect(() => {
+      const timer = setTimeout(() => {
+        navigation.replace('login');
+      }, 1000);
+
+      return () => {
+        clearTimeout(timer);
+      }
+  }, []);
+
   return (
     <ScreenTemplate center>
-      <Text style={styles.text}>Welcome</Text>
-      <Button label="Login" action={() => navigation.navigate('login')} />
-      <Button label="Register" action={() => navigation.navigate('register')} />
+      <Image style={styles.image} source={Logo} />
     </ScreenTemplate>
   );
 };
@@ -18,10 +26,8 @@ const Welcome = ({navigation}) => {
 export {Welcome};
 
 const styles = StyleSheet.create({
-  text: {
-    textAlign: 'center',
-    color: colors.primary,
-    fontSize: fonts.xl,
-    fontFamily: fonts.primary,
+  image: {
+    height: 150,
+    resizeMode: 'contain',
   },
 });
