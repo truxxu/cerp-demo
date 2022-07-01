@@ -71,15 +71,15 @@ export {Register};
 const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
-    color: colors.primary,
-    fontSize: fonts.lg,
+    color: colors.text,
+    fontSize: fonts.md,
     fontFamily: fonts.primary,
     marginBottom: margin.sm,
     marginTop: margin.md,
   },
   text: {
-    color: colors.primary,
-    fontSize: fonts.md,
+    color: colors.text,
+    fontSize: fonts.sm,
     fontFamily: fonts.primary,
     marginBottom: margin.md,
   },
