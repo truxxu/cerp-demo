@@ -53,8 +53,8 @@ const Login = ({navigation}) => {
           name="password"
           label="Contraseña"
           placeholder="Ingresa una contraseña"
-          keyboard="email-address"
           control={control}
+          isSecure={true}
         />
       </View>
 

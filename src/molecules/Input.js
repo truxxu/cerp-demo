@@ -4,7 +4,7 @@ import {Controller} from 'react-hook-form';
 
 import {fonts, colors, margin, padding} from '../styles/base.js';
 
-const Input = ({name, label, placeholder, keyboard, control}) => {
+const Input = ({name, label, placeholder, keyboard, control, isSecure}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -22,6 +22,7 @@ const Input = ({name, label, placeholder, keyboard, control}) => {
             keyboardType={keyboard}
             placeholder={placeholder}
             placeholderTextColor={colors.disabled2}
+            secureTextEntry={isSecure}
           />
         )}
         name={name}
