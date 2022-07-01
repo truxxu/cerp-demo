@@ -3,7 +3,7 @@ import {Text, StyleSheet, ScrollView} from 'react-native';
 import {useForm} from 'react-hook-form';
 
 import {fonts, colors, margin} from '../styles/base.js';
-import {ScreenTemplate, Button} from '../atoms';
+import {ScreenTemplate, Button, Logo} from '../atoms';
 import {Input} from '../molecules';
 
 const Register = ({navigation}) => {
@@ -23,8 +23,10 @@ const Register = ({navigation}) => {
   return (
     <ScreenTemplate>
       <ScrollView>
-        <Text style={styles.title}>
-          Por favor ingresa los siguientes datos personales
+        <Logo size={120} />
+        <Text style={styles.title}>¡Bienvenido!</Text>
+        <Text style={styles.text}>
+          Ingrese la siguiente información para completar su registro:
         </Text>
         <Input
           name="id"
@@ -69,22 +71,16 @@ export {Register};
 const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
-    color: colors.primary,
-    fontSize: fonts.lg,
-    fontFamily: fonts.primary,
-    marginBottom: margin.md,
-  },
-  text: {
-    color: colors.primary,
+    color: colors.text,
     fontSize: fonts.md,
     fontFamily: fonts.primary,
+    marginBottom: margin.sm,
+    marginTop: margin.md,
   },
-  input: {
-    color: colors.primary,
+  text: {
+    color: colors.text,
     fontSize: fonts.sm,
-    backgroundColor: 'whitesmoke',
     fontFamily: fonts.primary,
     marginBottom: margin.md,
-    marginTop: margin.sm,
   },
 });
