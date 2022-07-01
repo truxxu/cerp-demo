@@ -34,15 +34,16 @@ export {Input};
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: margin.md,
+    marginBottom: margin.md,
   },
   label: {
-    color: colors.text,
-    fontSize: fonts.sm,
+    color: colors.primary,
+    fontSize: fonts.xs,
     fontFamily: fonts.primary,
     marginBottom: margin.xs,
   },
   input: {
+    color: colors.text,
     fontSize: fonts.sm,
     fontFamily: fonts.primary,
     borderWidth: 1,
