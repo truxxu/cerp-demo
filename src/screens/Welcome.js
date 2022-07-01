@@ -2,8 +2,6 @@ import React, {useEffect} from 'react';
 import {Image, StyleSheet} from 'react-native';
 
 import {ScreenTemplate} from '../atoms';
-import {fonts, colors} from '../styles/base.js';
-import {Button} from '../atoms';
 
 import Logo from './../images/logo.png';
 
