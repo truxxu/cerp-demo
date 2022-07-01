@@ -2,6 +2,8 @@ export const colors = {
   primary: '#8F23D6',
   secondary: '#F8F8FF',
   disabled: 'gray',
+  disabled2: 'lightgray',
+  text: 'black',
 };
 
 export const padding = {

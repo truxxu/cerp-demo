@@ -1,9 +1,10 @@
 import React from 'react';
-import {Text, StyleSheet, TextInput, ScrollView} from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
+import {Text, StyleSheet, ScrollView} from 'react-native';
+import {useForm} from 'react-hook-form';
 
-import {ScreenTemplate, Button} from '../atoms';
 import {fonts, colors, margin} from '../styles/base.js';
+import {ScreenTemplate, Button, Logo} from '../atoms';
+import {Input} from '../molecules';
 
 const Register = ({navigation}) => {
   const {
@@ -22,76 +23,38 @@ const Register = ({navigation}) => {
   return (
     <ScreenTemplate>
       <ScrollView>
-        <Text style={styles.title}>
-          Por favor ingresa los siguientes datos personales
+        <Logo size={120} />
+        <Text style={styles.title}>¡Bienvenido!</Text>
+        <Text style={styles.text}>
+          Ingrese la siguiente información para completar su registro:
         </Text>
-        <Text style={styles.text}>Cédula</Text>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              keyboardType="numeric"
-            />
-          )}
+        <Input
           name="id"
-        />
-        <Text style={styles.text}>Número de celular</Text>
-        <Controller
+          label="Cédula"
+          placeholder="Ingresa tu número de cédula"
+          keyboard="numeric"
           control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              keyboardType="phone-pad"
-            />
-          )}
+        />
+        <Input
           name="phone"
-        />
-        <Text style={styles.text}>Correo electrónico</Text>
-        <Controller
+          label="Celular"
+          placeholder="Ingresa tu número de celular"
+          keyboard="numeric"
           control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              keyboardType="email-address"
-            />
-          )}
+        />
+        <Input
           name="email"
-        />
-        <Text style={styles.text}>Contraseña</Text>
-        <Controller
+          label="Email"
+          placeholder="Ingresa tu correo electrónico"
+          keyboard="email-address"
           control={control}
-          rules={{
-            required: true,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              keyboardType="visible-password"
-            />
-          )}
+        />
+        <Input
           name="password"
+          label="Contraseña"
+          placeholder="Ingresa una contraseña"
+          keyboard="email-address"
+          control={control}
         />
         <Button
           label="Aceptar"
@@ -108,22 +71,16 @@ export {Register};
 const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
-    color: colors.primary,
-    fontSize: fonts.lg,
-    fontFamily: fonts.primary,
-    marginBottom: margin.md,
-  },
-  text: {
-    color: colors.primary,
+    color: colors.text,
     fontSize: fonts.md,
     fontFamily: fonts.primary,
+    marginBottom: margin.sm,
+    marginTop: margin.md,
   },
-  input: {
-    color: colors.primary,
+  text: {
+    color: colors.text,
     fontSize: fonts.sm,
-    backgroundColor: 'whitesmoke',
     fontFamily: fonts.primary,
     marginBottom: margin.md,
-    marginTop: margin.sm,
   },
 });
