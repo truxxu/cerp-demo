@@ -25,7 +25,7 @@ const Login = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const verificationModal = () => {
-    return(
+    return (
       <Modal isVisible={isModalVisible} close={() => setIsModalVisible(false)}>
         <Text style={styles.text}>
           Por favor ingresa a continuación el código de autenticación que
@@ -96,5 +96,5 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     marginVertical: margin.xl,
-  }
+  },
 });

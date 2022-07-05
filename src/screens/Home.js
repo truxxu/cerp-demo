@@ -1,8 +1,8 @@
-import React from 'react';
-import {Text, StyleSheet, ScrollView, Pressable, View} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, {useState} from 'react';
+import {Text, StyleSheet, ScrollView} from 'react-native';
 
-import {ScreenTemplate, Card} from '../atoms';
+import {ScreenTemplate, Card, Modal, Button} from '../atoms';
+import {NewCardBtn} from '../molecules';
 import {fonts, colors, margin} from '../styles/base.js';
 
 const PRODUCTS = [
@@ -29,27 +29,31 @@ const PRODUCTS = [
 ];
 
 const Home = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const onCreate = () => {
+    setIsModalVisible(true);
+  };
+
+  const newCardModal = () => {
+    return (
+      <Modal isVisible={isModalVisible} close={() => setIsModalVisible(false)}>
+        <Text style={styles.title}>¡Felicidades!</Text>
+        <Text style={styles.text}>Tienes una nueva tarjeta Ecard</Text>
+        <Button label="Aceptar" action={() => setIsModalVisible(false)} />
+      </Modal>
+    );
+  };
+
   return (
     <ScreenTemplate>
       <ScrollView>
+        {newCardModal()}
         <Text style={styles.title}>Mis productos</Text>
         {PRODUCTS.map((e, i) => {
           return <Card key={i} data={e} />;
         })}
-        <Pressable
-          style={styles.container}
-          onPress={() => console.log('Add card')}>
-          <Icon
-            name="plus-circle-outline"
-            color={colors.disabled2}
-            size={50}
-            style={styles.icon}
-          />
-          <View>
-            <Text style={styles.placeholder}>Aún no tienes E-Cards.</Text>
-            <Text style={styles.placeholder}>¡Solicita una!</Text>
-          </View>
-        </Pressable>
+        <NewCardBtn action={onCreate} />
       </ScrollView>
     </ScreenTemplate>
   );
@@ -65,17 +69,10 @@ const styles = StyleSheet.create({
     marginBottom: margin.sm,
     marginTop: margin.md,
   },
-  container: {
-    flexDirection: 'row',
-    marginVertical: margin.lg,
-    justifyContent: 'center',
-  },
-  placeholder: {
-    color: colors.disabled2,
+  text: {
+    textAlign: 'center',
     fontSize: fonts.md,
     fontFamily: fonts.primary,
-  },
-  icon: {
-    marginRight: margin.sm,
+    color: colors.text,
   },
 });
