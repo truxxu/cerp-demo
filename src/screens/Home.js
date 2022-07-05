@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, ScrollView, Pressable} from 'react-native';
+import {Text, StyleSheet, ScrollView, Pressable, View} from 'react-native';
 
 import {ScreenTemplate, Card} from '../atoms';
 import {fonts, colors, margin} from '../styles/base.js';
@@ -39,9 +39,10 @@ const Home = () => {
           style={styles.container}
           onPress={() => console.log('Add card')}>
           <Text style={styles.icon}>+</Text>
-          <Text style={styles.placeholder}>
-            Aún no tienes E-Cards. ¡Solicita una!
-          </Text>
+          <View>
+            <Text style={styles.placeholder}>Aún no tienes E-Cards.</Text>
+            <Text style={styles.placeholder}>¡Solicita una!</Text>
+          </View>
         </Pressable>
       </ScrollView>
     </ScreenTemplate>
@@ -60,13 +61,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
+    marginVertical: margin.lg,
+    justifyContent: 'center',
   },
   placeholder: {
     color: colors.disabled2,
     fontSize: fonts.md,
     fontFamily: fonts.primary,
-    marginBottom: margin.sm,
-    marginTop: margin.md,
   },
   icon: {
     fontSize: 50,
