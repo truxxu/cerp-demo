@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet, ScrollView, Pressable, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {ScreenTemplate, Card} from '../atoms';
 import {fonts, colors, margin} from '../styles/base.js';
@@ -38,7 +39,12 @@ const Home = () => {
         <Pressable
           style={styles.container}
           onPress={() => console.log('Add card')}>
-          <Text style={styles.icon}>+</Text>
+          <Icon
+            name="plus-circle-outline"
+            color={colors.disabled2}
+            size={50}
+            style={styles.icon}
+          />
           <View>
             <Text style={styles.placeholder}>Aún no tienes E-Cards.</Text>
             <Text style={styles.placeholder}>¡Solicita una!</Text>
@@ -70,8 +76,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary,
   },
   icon: {
-    fontSize: 50,
-    color: colors.disabled2,
     marginRight: margin.sm,
   },
 });
