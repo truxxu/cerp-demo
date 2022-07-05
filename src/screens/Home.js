@@ -1,38 +1,18 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, ScrollView} from 'react-native';
 
-import {ScreenTemplate, Card, Modal, Button} from '../atoms';
+import {ScreenTemplate, Modal, Button} from '../atoms';
 import {NewCardBtn} from '../molecules';
-import {fonts, colors, margin} from '../styles/base.js';
-
-const PRODUCTS = [
-  {
-    label: 'Cuentas de Ahorro (1)',
-    product: 'Ahorros',
-    id: '345-0000-2332',
-    balance: 'COP$10.234.034',
-  },
-  {
-    label: 'CDTs (1)',
-    product: 'CDT',
-    id: '345-0000-2332',
-    balance: 'COP$56.234.224',
-    date: '13 Dic 2022',
-  },
-  {
-    label: 'E-Cards (1)',
-    product: 'Visa',
-    id: '****************3556',
-    balance: 'COP$0',
-    button: 'Recargar',
-  },
-];
+import {Products} from '../organisms';
+import {fonts, colors} from '../styles/base.js';
 
 const Home = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [eCard, setECard] = useState(0);
 
   const onCreate = () => {
     setIsModalVisible(true);
+    setECard(eCard + 1);
   };
 
   const newCardModal = () => {
@@ -49,11 +29,8 @@ const Home = () => {
     <ScreenTemplate>
       <ScrollView>
         {newCardModal()}
-        <Text style={styles.title}>Mis productos</Text>
-        {PRODUCTS.map((e, i) => {
-          return <Card key={i} data={e} />;
-        })}
-        <NewCardBtn action={onCreate} />
+        <Products cards={eCard} />
+        {!eCard && <NewCardBtn action={onCreate} />}
       </ScrollView>
     </ScreenTemplate>
   );
@@ -62,13 +39,6 @@ const Home = () => {
 export {Home};
 
 const styles = StyleSheet.create({
-  title: {
-    color: colors.text,
-    fontSize: fonts.lg,
-    fontFamily: fonts.primary,
-    marginBottom: margin.sm,
-    marginTop: margin.md,
-  },
   text: {
     textAlign: 'center',
     fontSize: fonts.md,
