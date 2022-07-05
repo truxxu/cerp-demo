@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {fonts, colors, margin, padding} from '../styles/base.js';
 
-const Card = ({data, view, action}) => {
+const Card = ({data, action}) => {
+  const [view, setView] = useState(false);
+
+  const toggleView = () => {
+    setView(!view);
+  };
+
   const handlePress = () => {
-    console.log('pressed');
+    action();
   };
 
   const hideText = show => {
@@ -25,7 +31,7 @@ const Card = ({data, view, action}) => {
           {data.product === 'Visa' ? (
             <View style={styles.private}>
               <Text style={styles.text}>{hideText(view)}</Text>
-              <Pressable onPress={action}>
+              <Pressable onPress={toggleView}>
                 <Icon
                   name="eye-outline"
                   color={colors.primary}

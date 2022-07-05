@@ -1,26 +1,102 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, ScrollView} from 'react-native';
+import {useForm} from 'react-hook-form';
 
 import {ScreenTemplate, Modal, Button} from '../atoms';
-import {NewCardBtn} from '../molecules';
+import {NewCardBtn, Input} from '../molecules';
 import {Products} from '../organisms';
-import {fonts, colors} from '../styles/base.js';
+import {fonts, colors, margin} from '../styles/base.js';
 
 const Home = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [eCard, setECard] = useState(0);
+  const [isNewCardModalVisible, setIsNewCardModalVisible] = useState(false);
+  const [isTopUpModalVisible, setIsTopUpModalVisible] = useState(false);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+  const [isEnterTokenModalVisible, setIsEnterTokenModalVisible] =
+    useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {isDirty, isValid},
+  } = useForm({
+    mode: 'onChange',
+  });
 
   const onCreate = () => {
-    setIsModalVisible(true);
+    setIsNewCardModalVisible(true);
     setECard(eCard + 1);
+  };
+
+  const onTopUp = () => {
+    setIsTopUpModalVisible(false);
+    setIsEnterTokenModalVisible(true);
+  };
+
+  const onSuccess = () => {
+    setIsEnterTokenModalVisible(false);
+    setIsSuccessModalVisible(true);
   };
 
   const newCardModal = () => {
     return (
-      <Modal isVisible={isModalVisible} close={() => setIsModalVisible(false)}>
+      <Modal isVisible={isNewCardModalVisible}>
         <Text style={styles.title}>¡Felicidades!</Text>
         <Text style={styles.text}>Tienes una nueva tarjeta Ecard</Text>
-        <Button label="Aceptar" action={() => setIsModalVisible(false)} />
+        <Button
+          label="Aceptar"
+          action={() => setIsNewCardModalVisible(false)}
+        />
+      </Modal>
+    );
+  };
+
+  const topUpModal = () => {
+    return (
+      <Modal
+        isVisible={isTopUpModalVisible}
+        close={() => setIsEnterTokenModalVisible(true)}>
+        <Text style={styles.text}>
+          Ingresa el monto a recargar y escoge el producto de origen
+        </Text>
+        <Input
+          name="amount"
+          label="Monto"
+          placeholder="Ingresa el monto a transferir"
+          keyboard="numeric"
+          control={control}
+        />
+        <Button label="Aceptar" action={onTopUp} />
+      </Modal>
+    );
+  };
+
+  const enterTokenModal = () => {
+    return (
+      <Modal isVisible={isEnterTokenModalVisible}>
+        <Text style={styles.text}>
+          Por favor ingresa el token de verificación que hemos enviado a tu
+          celular
+        </Text>
+        <Input
+          name="code"
+          label="Token de verificación"
+          placeholder="Ingresa tu token de verificación"
+          keyboard="numeric"
+          control={control}
+        />
+        <Button label="Recargar" action={onSuccess} />
+      </Modal>
+    );
+  };
+
+  const successModal = () => {
+    return (
+      <Modal isVisible={isSuccessModalVisible}>
+        <Text style={styles.title}>¡Recarga exitosa!</Text>
+        <Text style={styles.text}>Tu E-Card ha sido recargada con éxito</Text>
+        <Button label="Cerrar" action={() => setIsSuccessModalVisible(false)} />
       </Modal>
     );
   };
@@ -28,8 +104,11 @@ const Home = () => {
   return (
     <ScreenTemplate>
       <ScrollView>
+        {topUpModal()}
         {newCardModal()}
-        <Products cards={eCard} />
+        {enterTokenModal()}
+        {successModal()}
+        <Products cards={eCard} action={() => setIsTopUpModalVisible(true)} />
         {!eCard && <NewCardBtn action={onCreate} />}
       </ScrollView>
     </ScreenTemplate>
@@ -44,5 +123,12 @@ const styles = StyleSheet.create({
     fontSize: fonts.md,
     fontFamily: fonts.primary,
     color: colors.text,
+  },
+  title: {
+    color: colors.text,
+    fontSize: fonts.lg,
+    fontFamily: fonts.primary,
+    marginBottom: margin.sm,
+    marginTop: margin.md,
   },
 });

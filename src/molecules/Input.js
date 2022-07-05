@@ -36,6 +36,7 @@ export {Input};
 const styles = StyleSheet.create({
   container: {
     marginBottom: margin.md,
+    width: '100%',
   },
   label: {
     color: colors.primary,

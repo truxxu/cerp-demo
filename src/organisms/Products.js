@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 
 import {fonts, colors, margin} from '../styles/base.js';
@@ -24,13 +24,7 @@ const PRODUCTS = [
   },
 ];
 
-const Products = ({cards}) => {
-  const [view, setView] = useState(false);
-
-  const toggleView = () => {
-    setView(!view);
-  };
-
+const Products = ({cards, action}) => {
   return (
     <>
       <Text style={styles.title}>Mis productos</Text>
@@ -46,8 +40,7 @@ const Products = ({cards}) => {
             balance: 'COP$0',
             button: 'Recargar',
           }}
-          view={view}
-          action={toggleView}
+          action={action}
         />
       ) : null}
     </>
