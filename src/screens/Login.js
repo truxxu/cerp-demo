@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Image, Pressable, Text, StyleSheet, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 
 import {ScreenTemplate, Button, Modal} from '../atoms';
 import {Input} from '../molecules';
 import {fonts, colors, margin} from '../styles/base.js';
+import {UserContext} from '../context/user-context';
 
 import Logo from './../images/logo.png';
 
@@ -23,11 +24,11 @@ const VerificationModal = ({isVisible, onClose, onSubmit}) => {
     onSubmit();
   };
 
-  return(
+  return (
     <Modal isVisible={isVisible} close={onClose}>
       <Text style={styles.text}>
-        Por favor ingresa a continuación el código de autenticación que
-        enviamos a tu celular.
+        Por favor ingresa a continuación el código de autenticación que enviamos
+        a tu celular.
       </Text>
       <View style={styles.formContainerModal}>
         <Input
@@ -39,15 +40,17 @@ const VerificationModal = ({isVisible, onClose, onSubmit}) => {
         />
       </View>
       <Button
-          label="Autenticar"
-          action={handleSubmit(onSubmitModal)}
-          disabled={!isDirty || !isValid}
-        />
+        label="Autenticar"
+        action={handleSubmit(onSubmitModal)}
+        disabled={!isDirty || !isValid}
+      />
     </Modal>
   );
-}
+};
 
 const Login = ({navigation}) => {
+  const user = useContext(UserContext);
+
   const {
     control,
     handleSubmit,
@@ -63,7 +66,7 @@ const Login = ({navigation}) => {
   };
 
   const onSubmitModal = () => {
-    navigation.replace('home');
+    user.completeSetup();
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -138,5 +141,5 @@ const styles = StyleSheet.create({
   formContainerModal: {
     width: '100%',
     marginVertical: margin.md,
-  }
+  },
 });

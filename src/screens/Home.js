@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, ScrollView, Pressable} from 'react-native';
 
-import {ScreenTemplate, Card} from '../atoms';
+import {ScreenTemplate, Card, SettingsBtn} from '../atoms';
 import {fonts, colors, margin} from '../styles/base.js';
 
 const PRODUCTS = [
@@ -27,9 +27,13 @@ const PRODUCTS = [
   },
 ];
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const onButtonPress = () => {
+    navigation.navigate('settings');
+  };
   return (
     <ScreenTemplate>
+      <SettingsBtn onPress={onButtonPress} />
       <ScrollView>
         <Text style={styles.title}>Mis productos</Text>
         {PRODUCTS.map((e, i) => {
