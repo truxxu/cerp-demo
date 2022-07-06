@@ -45,7 +45,7 @@ const App = () => {
             <Stack.Screen
               name="settings"
               component={Settings}
-              options={{title: 'settings'}}
+              options={{title: 'Settings'}}
             />
           </>
         )}

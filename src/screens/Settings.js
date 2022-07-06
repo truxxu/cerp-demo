@@ -1,12 +1,20 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React, {useContext} from 'react';
+import {BackHandler} from 'react-native';
 
-import {ScreenTemplate} from '../atoms';
+import {ScreenTemplate, Button} from '../atoms';
+import {UserContext} from '../context/user-context';
 
 const Settings = () => {
+  const user = useContext(UserContext);
+
+  const onLogout = () => {
+    user.logout();
+    BackHandler.exitApp();
+  };
+
   return (
     <ScreenTemplate>
-      <Text>Settings</Text>
+      <Button label="Logout" action={onLogout} />
     </ScreenTemplate>
   );
 };
