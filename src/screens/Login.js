@@ -8,6 +8,45 @@ import {fonts, colors, margin} from '../styles/base.js';
 
 import Logo from './../images/logo.png';
 
+const VerificationModal = ({isVisible, onClose, onSubmit}) => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {isDirty, isValid},
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const onSubmitModal = () => {
+    reset();
+    onSubmit();
+  };
+
+  return(
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.text}>
+        Por favor ingresa a continuación el código de autenticación que
+        enviamos a tu celular.
+      </Text>
+      <View style={styles.formContainerModal}>
+        <Input
+          name="code"
+          label="Código de Autenticación"
+          placeholder="Ingresa tu código de autenticación"
+          keyboard="numeric"
+          control={control}
+        />
+      </View>
+      <Button
+          label="Autenticar"
+          action={handleSubmit(onSubmitModal)}
+          disabled={!isDirty || !isValid}
+        />
+    </Modal>
+  );
+}
+
 const Login = ({navigation}) => {
   const {
     control,
@@ -20,24 +59,22 @@ const Login = ({navigation}) => {
 
   const onSubmit = () => {
     setIsModalVisible(true);
+    reset();
+  };
+
+  const onSubmitModal = () => {
+    navigation.replace('home');
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const verificationModal = () => {
-    return(
-      <Modal isVisible={isModalVisible} close={() => setIsModalVisible(false)}>
-        <Text style={styles.text}>
-          Por favor ingresa a continuación el código de autenticación que
-          enviamos a tu celular.
-        </Text>
-      </Modal>
-    );
-  };
-
   return (
     <ScreenTemplate center>
-      {verificationModal()}
+      <VerificationModal
+        isVisible={isModalVisible}
+        onSubmit={() => onSubmitModal()}
+        onClose={() => setIsModalVisible(false)}
+      />
       <Image style={styles.image} source={Logo} />
       <Text style={[styles.text, styles.title]}>¡Bienvenido!</Text>
 
@@ -81,8 +118,9 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    fontSize: fonts.md,
+    fontSize: fonts.sm,
     fontFamily: fonts.primary,
+    color: colors.text,
   },
   link: {
     color: colors.primary,
@@ -96,5 +134,9 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
     marginVertical: margin.xl,
+  },
+  formContainerModal: {
+    width: '100%',
+    marginVertical: margin.md,
   }
 });

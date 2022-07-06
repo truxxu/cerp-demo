@@ -3,7 +3,7 @@ import {Text, Pressable, StyleSheet, View} from 'react-native';
 
 import {default as BaseModal}  from 'react-native-modal';
 
-import {fonts, colors} from '../styles/base.js';
+import {colors} from '../styles/base.js';
 
 const Modal = ({isVisible, close, children}) => {
   return (
@@ -11,7 +11,7 @@ const Modal = ({isVisible, close, children}) => {
       <View style={styles.container}>
         <View style={styles.button}>
           <Pressable onPress={close}>
-            <Text>cerrar</Text>
+            <Text style={styles.text}>cerrar</Text>
           </Pressable>
         </View>
         <View style={styles.content}>
@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'flex-end',
+  },
+  text: {
+    color: colors.text,
   },
   content: {
     justifyContent: 'center',
