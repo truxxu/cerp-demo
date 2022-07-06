@@ -89,7 +89,7 @@ const Login = ({navigation}) => {
         <Input
           name="password"
           label="Contraseña"
-          placeholder="Ingresa una contraseña"
+          placeholder="Ingresa tu contraseña"
           control={control}
           isSecure={true}
         />

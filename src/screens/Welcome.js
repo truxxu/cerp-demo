@@ -8,7 +8,7 @@ import Logo from './../images/logo.png';
 const Welcome = ({navigation}) => {
   useEffect(() => {
       const timer = setTimeout(() => {
-        navigation.replace('login');
+        navigation.replace('register');
       }, 1000);
 
       return () => {
