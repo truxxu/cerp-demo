@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Home, Login, Register, Settings, Welcome} from './src/screens';
 import {colors} from './src/styles/base.js';
+import {UserContext} from './src/context/user-context';
 
 const Stack = createNativeStackNavigator();
 const headerOptions = {
@@ -15,30 +16,39 @@ const headerOptions = {
 };
 
 const App = () => {
+  const user = useContext(UserContext);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={headerOptions}>
-        <Stack.Screen
-          name="welcome"
-          component={Welcome}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="register"
-          component={Register}
-          options={{title: '', headerShown: false}}
-        />
-        <Stack.Screen
-          name="login"
-          component={Login}
-          options={{title: '', headerShown: false}}
-        />
-        <Stack.Screen name="home" component={Home} options={{title: ''}} />
-        <Stack.Screen
-          name="settings"
-          component={Settings}
-          options={{title: 'settings'}}
-        />
+        {user.firstTime === 'true' ? (
+          <>
+            <Stack.Screen
+              name="welcome"
+              component={Welcome}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="register"
+              component={Register}
+              options={{title: '', headerShown: false}}
+            />
+            <Stack.Screen
+              name="login"
+              component={Login}
+              options={{title: '', headerShown: false}}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="home" component={Home} options={{title: ''}} />
+            <Stack.Screen
+              name="settings"
+              component={Settings}
+              options={{title: 'settings'}}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
