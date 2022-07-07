@@ -12,10 +12,6 @@ const ORIGIN = [
     label: 'Ahorros',
     value: 'savings',
   },
-  {
-    label: 'CDT',
-    value: 'cdt',
-  },
 ];
 
 const Home = ({navigation}) => {
@@ -52,7 +48,9 @@ const Home = ({navigation}) => {
 
   const newCardModal = () => {
     return (
-      <Modal isVisible={isNewCardModalVisible}>
+      <Modal
+        isVisible={isNewCardModalVisible}
+        close={() => setIsNewCardModalVisible(false)}>
         <Text style={styles.title}>¡Felicidades!</Text>
         <Text style={styles.text}>Tienes una nueva tarjeta Ecard</Text>
         <Button
@@ -67,7 +65,7 @@ const Home = ({navigation}) => {
     return (
       <Modal
         isVisible={isTopUpModalVisible}
-        close={() => setIsEnterTokenModalVisible(true)}>
+        close={() => setIsTopUpModalVisible(false)}>
         <Text style={styles.text}>
           Ingresa el monto a recargar y escoge el producto de origen
         </Text>
@@ -86,7 +84,9 @@ const Home = ({navigation}) => {
 
   const enterTokenModal = () => {
     return (
-      <Modal isVisible={isEnterTokenModalVisible}>
+      <Modal
+        isVisible={isEnterTokenModalVisible}
+        close={() => setIsEnterTokenModalVisible(false)}>
         <Text style={styles.text}>
           Por favor ingresa el token de verificación que hemos enviado a tu
           celular
@@ -105,7 +105,9 @@ const Home = ({navigation}) => {
 
   const successModal = () => {
     return (
-      <Modal isVisible={isSuccessModalVisible}>
+      <Modal
+        isVisible={isSuccessModalVisible}
+        close={() => setIsSuccessModalVisible(false)}>
         <Text style={styles.title}>¡Recarga exitosa!</Text>
         <Text style={styles.text}>Tu E-Card ha sido recargada con éxito</Text>
         <Button label="Cerrar" action={() => setIsSuccessModalVisible(false)} />
