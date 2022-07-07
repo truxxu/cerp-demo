@@ -96,7 +96,7 @@ const Register = ({navigation}) => {
         onSubmit={() => onSubmitSucModal()}
         onClose={() => setIsSucModalVisible(false)}
       />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Logo size={120} />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>¡Bienvenido!</Text>
