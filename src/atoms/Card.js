@@ -1,20 +1,48 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {fonts, colors, margin, padding} from '../styles/base.js';
 
-const Card = ({data}) => {
-  const handlePress = () => {
-    console.log('pressed');
+const Card = ({data, action}) => {
+  const [view, setView] = useState(false);
+
+  const toggleView = () => {
+    setView(!view);
   };
+
+  const handlePress = () => {
+    action();
+  };
+
+  const hideText = show => {
+    return show ? data.id : '************' + data.id.substring(12, 16);
+  };
+
+  if (data?.label) {
+    return <Text style={styles.label}>{data.label}</Text>;
+  }
 
   return (
     <>
-      <Text style={styles.label}>{data.label}</Text>
       <View style={styles.container}>
         <View>
           <Text style={styles.title}>{data.product}</Text>
-          <Text style={styles.text}>{data.id}</Text>
+          {data.product === 'Visa' ? (
+            <View style={styles.private}>
+              <Text style={styles.text}>{hideText(view)}</Text>
+              <Pressable onPress={toggleView}>
+                <Icon
+                  name={view ? 'eye-off-outline' : 'eye-outline'}
+                  color={colors.primary}
+                  size={fonts.md}
+                  style={styles.icon}
+                />
+              </Pressable>
+            </View>
+          ) : (
+            <Text style={styles.text}>{data.id}</Text>
+          )}
         </View>
         <View style={styles.textContainer}>
           <View>
@@ -78,5 +106,12 @@ const styles = StyleSheet.create({
     paddingVertical: padding.xs,
     paddingHorizontal: padding.sm,
     borderColor: colors.disabled2,
+  },
+  private: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  icon: {
+    marginHorizontal: margin.sm,
   },
 });

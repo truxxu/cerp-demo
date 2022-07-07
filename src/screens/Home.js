@@ -1,52 +1,166 @@
-import React from 'react';
-import {Text, StyleSheet, ScrollView, Pressable} from 'react-native';
+import React, {useState} from 'react';
+import {Text, StyleSheet, ScrollView} from 'react-native';
+import {useForm} from 'react-hook-form';
 
-import {ScreenTemplate, Card, SettingsBtn} from '../atoms';
+import {ScreenTemplate, Modal, Button, SettingsBtn} from '../atoms';
+import {NewCardBtn, Input, DropDown} from '../molecules';
+import {Products} from '../organisms';
 import {fonts, colors, margin} from '../styles/base.js';
 
-const PRODUCTS = [
+const ORIGIN = [
   {
-    label: 'Cuentas de Ahorro (1)',
-    product: 'Ahorros',
-    id: '345-0000-2332',
-    balance: 'COP$10.234.034',
-  },
-  {
-    label: 'CDTs (1)',
-    product: 'CDT',
-    id: '345-0000-2332',
-    balance: 'COP$56.234.224',
-    date: '13 Dic 2022',
-  },
-  {
-    label: 'E-Cards (1)',
-    product: 'Visa',
-    id: '****************3556',
-    balance: 'COP$0',
-    button: 'Recargar',
+    label: 'Ahorros',
+    value: 'savings',
   },
 ];
 
+const NewCardModal = ({isVisible, onClose, onSubmit}) => {
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.title}>¡Felicidades!</Text>
+      <Text style={styles.text}>Tienes una nueva tarjeta Ecard</Text>
+      <Button label="Aceptar" action={onSubmit} />
+    </Modal>
+  );
+};
+
+const TopUpModal = ({isVisible, onClose, onSubmit}) => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {isDirty, isValid},
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const onSubmitModal = () => {
+    reset();
+    onSubmit();
+  };
+
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.text}>
+        Ingresa el monto a recargar y escoge el producto de origen
+      </Text>
+      <Input
+        name="amount"
+        label="Monto"
+        placeholder="Ingresa el monto a transferir"
+        keyboard="numeric"
+        control={control}
+      />
+      <DropDown label="Producto Origen" data={ORIGIN} />
+      <Button
+        label="Aceptar"
+        action={handleSubmit(onSubmitModal)}
+        disabled={!isDirty || !isValid}
+      />
+    </Modal>
+  );
+};
+
+const EnterTokenModal = ({isVisible, onClose, onSubmit}) => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {isDirty, isValid},
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const onSubmitModal = () => {
+    reset();
+    onSubmit();
+  };
+
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.text}>
+        Por favor ingresa el token de verificación que hemos enviado a tu
+        celular
+      </Text>
+      <Input
+        name="code"
+        label="Token de verificación"
+        placeholder="Ingresa tu token de verificación"
+        keyboard="numeric"
+        control={control}
+      />
+      <Button
+        label="Recargar"
+        action={handleSubmit(onSubmitModal)}
+        disabled={!isDirty || !isValid}
+      />
+    </Modal>
+  );
+};
+
+const SuccessModal = ({isVisible, onClose, onSubmit}) => {
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.title}>¡Recarga exitosa!</Text>
+      <Text style={styles.text}>Tu E-Card ha sido recargada con éxito</Text>
+      <Button label="Cerrar" action={onSubmit} />
+    </Modal>
+  );
+};
+
 const Home = ({navigation}) => {
+  const [eCard, setECard] = useState(0);
+  const [isNewCardModalVisible, setIsNewCardModalVisible] = useState(false);
+  const [isTopUpModalVisible, setIsTopUpModalVisible] = useState(false);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+  const [isEnterTokenModalVisible, setIsEnterTokenModalVisible] =
+    useState(false);
+
+  const onAccept = () => {
+    setECard(eCard + 1);
+    setIsNewCardModalVisible(false);
+  };
+
+  const onTopUp = () => {
+    setIsTopUpModalVisible(false);
+    setIsEnterTokenModalVisible(true);
+  };
+
+  const onSuccess = () => {
+    setIsEnterTokenModalVisible(false);
+    setIsSuccessModalVisible(true);
+  };
+
   const onButtonPress = () => {
     navigation.navigate('settings');
   };
+
   return (
     <ScreenTemplate>
       <SettingsBtn onPress={onButtonPress} />
       <ScrollView>
-        <Text style={styles.title}>Mis productos</Text>
-        {PRODUCTS.map((e, i) => {
-          return <Card key={i} data={e} />;
-        })}
-        <Pressable
-          style={styles.container}
-          onPress={() => console.log('Add card')}>
-          <Text style={styles.icon}>+</Text>
-          <Text style={styles.placeholder}>
-            Aún no tienes E-Cards. ¡Solicita una!
-          </Text>
-        </Pressable>
+        <NewCardModal
+          isVisible={isNewCardModalVisible}
+          onSubmit={onAccept}
+          onClose={() => setIsNewCardModalVisible(false)}
+        />
+        <TopUpModal
+          isVisible={isTopUpModalVisible}
+          onSubmit={onTopUp}
+          onClose={() => setIsTopUpModalVisible(false)}
+        />
+        <EnterTokenModal
+          isVisible={isEnterTokenModalVisible}
+          onSubmit={onSuccess}
+          onClose={() => setIsEnterTokenModalVisible(false)}
+        />
+        <SuccessModal
+          isVisible={isSuccessModalVisible}
+          onSubmit={() => setIsSuccessModalVisible(false)}
+          onClose={() => setIsSuccessModalVisible(false)}
+        />
+        <Products cards={eCard} action={() => setIsTopUpModalVisible(true)} />
+        {!eCard && <NewCardBtn action={() => setIsNewCardModalVisible(true)} />}
       </ScrollView>
     </ScreenTemplate>
   );
@@ -55,26 +169,18 @@ const Home = ({navigation}) => {
 export {Home};
 
 const styles = StyleSheet.create({
+  text: {
+    textAlign: 'center',
+    fontSize: fonts.md,
+    fontFamily: fonts.primary,
+    color: colors.text,
+    marginBottom: margin.lg,
+  },
   title: {
     color: colors.text,
     fontSize: fonts.lg,
     fontFamily: fonts.primary,
     marginBottom: margin.sm,
     marginTop: margin.md,
-  },
-  container: {
-    flexDirection: 'row',
-  },
-  placeholder: {
-    color: colors.disabled2,
-    fontSize: fonts.md,
-    fontFamily: fonts.primary,
-    marginBottom: margin.sm,
-    marginTop: margin.md,
-  },
-  icon: {
-    fontSize: 50,
-    color: colors.disabled2,
-    marginRight: margin.sm,
   },
 });

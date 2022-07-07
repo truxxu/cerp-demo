@@ -7,13 +7,13 @@ import Logo from './../images/logo.png';
 
 const Welcome = ({navigation}) => {
   useEffect(() => {
-      const timer = setTimeout(() => {
-        navigation.replace('register');
-      }, 1000);
+    const timer = setTimeout(() => {
+      navigation.replace('register');
+    }, 1000);
 
-      return () => {
-        clearTimeout(timer);
-      }
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

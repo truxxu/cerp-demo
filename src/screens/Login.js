@@ -50,6 +50,7 @@ const VerificationModal = ({isVisible, onClose, onSubmit}) => {
 
 const Login = ({navigation}) => {
   const user = useContext(UserContext);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const {
     control,
@@ -68,8 +69,6 @@ const Login = ({navigation}) => {
   const onSubmitModal = () => {
     user.completeSetup();
   };
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <ScreenTemplate center>

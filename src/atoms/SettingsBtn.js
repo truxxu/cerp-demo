@@ -1,12 +1,21 @@
 import React from 'react';
-import {StyleSheet, Pressable, Text} from 'react-native';
-import {colors} from '../styles/base.js';
+import {StyleSheet, Pressable, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {colors, margin} from '../styles/base.js';
 
 const SettingsBtn = ({onPress}) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
-      <Text style={styles.text}>Options</Text>
-    </Pressable>
+    <View style={styles.container}>
+      <Pressable style={styles.button} onPress={onPress}>
+        <Icon
+          name="cog"
+          color={colors.disabled2}
+          size={25}
+          style={styles.icon}
+        />
+      </Pressable>
+    </View>
   );
 };
 
@@ -14,7 +23,11 @@ export {SettingsBtn};
 
 const styles = StyleSheet.create({
   container: {},
-  text: {
-    color: colors.primary,
+  icon: {
+    marginRight: margin.sm,
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
 });

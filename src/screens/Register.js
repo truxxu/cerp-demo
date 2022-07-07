@@ -21,15 +21,13 @@ const VerificationModal = ({isVisible, onClose, onSubmit}) => {
     onSubmit();
   };
 
-  return(
+  return (
     <Modal isVisible={isVisible} close={onClose}>
       <Text style={styles.text}>
-        Por favor ingresa a continuación el código de verificación
-        que enviamos al correo:
+        Por favor ingresa a continuación el código de verificación que enviamos
+        al correo:
       </Text>
-      <Text style={styles.title}>
-        jairo@correo.com
-      </Text>
+      <Text style={styles.title}>jairo@correo.com</Text>
       <View style={styles.formContainerModal}>
         <Input
           name="code"
@@ -40,28 +38,24 @@ const VerificationModal = ({isVisible, onClose, onSubmit}) => {
         />
       </View>
       <Button
-          label="Verificar"
-          action={handleSubmit(onSubmitModal)}
-          disabled={!isDirty || !isValid}
-        />
+        label="Verificar"
+        action={handleSubmit(onSubmitModal)}
+        disabled={!isDirty || !isValid}
+      />
     </Modal>
   );
-}
+};
 
-const SuccessModal = ({isVisible, onClose, onSubmit}) =>
+const SuccessModal = ({isVisible, onClose, onSubmit}) => (
   <Modal isVisible={isVisible} close={onClose}>
-    <Text style={styles.title}>
-      ¡Verificación Correcta!
-    </Text>
+    <Text style={styles.title}>¡Verificación Correcta!</Text>
     <Text style={styles.text}>
       A continuación puedes iniciar sesión con tu correo y contraseña.
     </Text>
 
-    <Button
-      label="Continuar"
-      action={onSubmit}
-    />
+    <Button label="Continuar" action={onSubmit} />
   </Modal>
+);
 
 const Register = ({navigation}) => {
   const {
