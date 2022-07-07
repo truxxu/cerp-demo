@@ -7,6 +7,17 @@ import {NewCardBtn, Input, DropDown} from '../molecules';
 import {Products} from '../organisms';
 import {fonts, colors, margin} from '../styles/base.js';
 
+const ORIGIN = [
+  {
+    label: 'Ahorros',
+    value: 'savings',
+  },
+  {
+    label: 'CDT',
+    value: 'cdt',
+  },
+];
+
 const Home = ({navigation}) => {
   const [eCard, setECard] = useState(0);
   const [isNewCardModalVisible, setIsNewCardModalVisible] = useState(false);
@@ -67,7 +78,7 @@ const Home = ({navigation}) => {
           keyboard="numeric"
           control={control}
         />
-        <DropDown />
+        <DropDown label="Producto Origen" data={ORIGIN} />
         <Button label="Aceptar" action={onTopUp} />
       </Modal>
     );
@@ -129,6 +140,7 @@ const styles = StyleSheet.create({
     fontSize: fonts.md,
     fontFamily: fonts.primary,
     color: colors.text,
+    marginBottom: margin.lg,
   },
   title: {
     color: colors.text,
