@@ -33,7 +33,7 @@ const Card = ({data, action}) => {
               <Text style={styles.text}>{hideText(view)}</Text>
               <Pressable onPress={toggleView}>
                 <Icon
-                  name="eye-outline"
+                  name={view ? 'eye-off-outline' : 'eye-outline'}
                   color={colors.primary}
                   size={fonts.md}
                   style={styles.icon}
