@@ -3,7 +3,7 @@ import {Text, StyleSheet, ScrollView} from 'react-native';
 import {useForm} from 'react-hook-form';
 
 import {ScreenTemplate, Modal, Button, SettingsBtn} from '../atoms';
-import {NewCardBtn, Input} from '../molecules';
+import {NewCardBtn, Input, DropDown} from '../molecules';
 import {Products} from '../organisms';
 import {fonts, colors, margin} from '../styles/base.js';
 
@@ -67,6 +67,7 @@ const Home = ({navigation}) => {
           keyboard="numeric"
           control={control}
         />
+        <DropDown />
         <Button label="Aceptar" action={onTopUp} />
       </Modal>
     );
