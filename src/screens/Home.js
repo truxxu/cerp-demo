@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {Text, StyleSheet, ScrollView} from 'react-native';
 import {useForm} from 'react-hook-form';
 
-import {ScreenTemplate, Modal, Button} from '../atoms';
+import {ScreenTemplate, Modal, Button, SettingsBtn} from '../atoms';
 import {NewCardBtn, Input} from '../molecules';
 import {Products} from '../organisms';
 import {fonts, colors, margin} from '../styles/base.js';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [eCard, setECard] = useState(0);
   const [isNewCardModalVisible, setIsNewCardModalVisible] = useState(false);
   const [isTopUpModalVisible, setIsTopUpModalVisible] = useState(false);
@@ -101,8 +101,13 @@ const Home = () => {
     );
   };
 
+  const onButtonPress = () => {
+    navigation.navigate('settings');
+  };
+
   return (
     <ScreenTemplate>
+      <SettingsBtn onPress={onButtonPress} />
       <ScrollView>
         {topUpModal()}
         {newCardModal()}

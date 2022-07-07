@@ -11,7 +11,7 @@ const Modal = ({isVisible, close, children}) => {
       <View style={styles.container}>
         <View style={styles.button}>
           <Pressable onPress={close}>
-            <Text>cerrar</Text>
+            <Text style={styles.text}>cerrar</Text>
           </Pressable>
         </View>
         <View style={styles.content}>{children}</View>
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'flex-end',
+  },
+  text: {
+    color: colors.text,
   },
   content: {
     justifyContent: 'center',
