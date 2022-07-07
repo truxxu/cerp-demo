@@ -14,14 +14,17 @@ const ORIGIN = [
   },
 ];
 
-const Home = ({navigation}) => {
-  const [eCard, setECard] = useState(0);
-  const [isNewCardModalVisible, setIsNewCardModalVisible] = useState(false);
-  const [isTopUpModalVisible, setIsTopUpModalVisible] = useState(false);
-  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
-  const [isEnterTokenModalVisible, setIsEnterTokenModalVisible] =
-    useState(false);
+const NewCardModal = ({isVisible, onClose, onSubmit}) => {
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.title}>¡Felicidades!</Text>
+      <Text style={styles.text}>Tienes una nueva tarjeta Ecard</Text>
+      <Button label="Aceptar" action={onSubmit} />
+    </Modal>
+  );
+};
 
+const TopUpModal = ({isVisible, onClose, onSubmit}) => {
   const {
     control,
     handleSubmit,
@@ -31,9 +34,91 @@ const Home = ({navigation}) => {
     mode: 'onChange',
   });
 
-  const onCreate = () => {
-    setIsNewCardModalVisible(true);
+  const onSubmitModal = () => {
+    reset();
+    onSubmit();
+  };
+
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.text}>
+        Ingresa el monto a recargar y escoge el producto de origen
+      </Text>
+      <Input
+        name="amount"
+        label="Monto"
+        placeholder="Ingresa el monto a transferir"
+        keyboard="numeric"
+        control={control}
+      />
+      <DropDown label="Producto Origen" data={ORIGIN} />
+      <Button
+        label="Aceptar"
+        action={handleSubmit(onSubmitModal)}
+        disabled={!isDirty || !isValid}
+      />
+    </Modal>
+  );
+};
+
+const EnterTokenModal = ({isVisible, onClose, onSubmit}) => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {isDirty, isValid},
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const onSubmitModal = () => {
+    reset();
+    onSubmit();
+  };
+
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.text}>
+        Por favor ingresa el token de verificación que hemos enviado a tu
+        celular
+      </Text>
+      <Input
+        name="code"
+        label="Token de verificación"
+        placeholder="Ingresa tu token de verificación"
+        keyboard="numeric"
+        control={control}
+      />
+      <Button
+        label="Recargar"
+        action={handleSubmit(onSubmitModal)}
+        disabled={!isDirty || !isValid}
+      />
+    </Modal>
+  );
+};
+
+const SuccessModal = ({isVisible, onClose, onSubmit}) => {
+  return (
+    <Modal isVisible={isVisible} close={onClose}>
+      <Text style={styles.title}>¡Recarga exitosa!</Text>
+      <Text style={styles.text}>Tu E-Card ha sido recargada con éxito</Text>
+      <Button label="Cerrar" action={onSubmit} />
+    </Modal>
+  );
+};
+
+const Home = ({navigation}) => {
+  const [eCard, setECard] = useState(0);
+  const [isNewCardModalVisible, setIsNewCardModalVisible] = useState(false);
+  const [isTopUpModalVisible, setIsTopUpModalVisible] = useState(false);
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+  const [isEnterTokenModalVisible, setIsEnterTokenModalVisible] =
+    useState(false);
+
+  const onAccept = () => {
     setECard(eCard + 1);
+    setIsNewCardModalVisible(false);
   };
 
   const onTopUp = () => {
@@ -46,75 +131,6 @@ const Home = ({navigation}) => {
     setIsSuccessModalVisible(true);
   };
 
-  const newCardModal = () => {
-    return (
-      <Modal
-        isVisible={isNewCardModalVisible}
-        close={() => setIsNewCardModalVisible(false)}>
-        <Text style={styles.title}>¡Felicidades!</Text>
-        <Text style={styles.text}>Tienes una nueva tarjeta Ecard</Text>
-        <Button
-          label="Aceptar"
-          action={() => setIsNewCardModalVisible(false)}
-        />
-      </Modal>
-    );
-  };
-
-  const topUpModal = () => {
-    return (
-      <Modal
-        isVisible={isTopUpModalVisible}
-        close={() => setIsTopUpModalVisible(false)}>
-        <Text style={styles.text}>
-          Ingresa el monto a recargar y escoge el producto de origen
-        </Text>
-        <Input
-          name="amount"
-          label="Monto"
-          placeholder="Ingresa el monto a transferir"
-          keyboard="numeric"
-          control={control}
-        />
-        <DropDown label="Producto Origen" data={ORIGIN} />
-        <Button label="Aceptar" action={onTopUp} />
-      </Modal>
-    );
-  };
-
-  const enterTokenModal = () => {
-    return (
-      <Modal
-        isVisible={isEnterTokenModalVisible}
-        close={() => setIsEnterTokenModalVisible(false)}>
-        <Text style={styles.text}>
-          Por favor ingresa el token de verificación que hemos enviado a tu
-          celular
-        </Text>
-        <Input
-          name="code"
-          label="Token de verificación"
-          placeholder="Ingresa tu token de verificación"
-          keyboard="numeric"
-          control={control}
-        />
-        <Button label="Recargar" action={onSuccess} />
-      </Modal>
-    );
-  };
-
-  const successModal = () => {
-    return (
-      <Modal
-        isVisible={isSuccessModalVisible}
-        close={() => setIsSuccessModalVisible(false)}>
-        <Text style={styles.title}>¡Recarga exitosa!</Text>
-        <Text style={styles.text}>Tu E-Card ha sido recargada con éxito</Text>
-        <Button label="Cerrar" action={() => setIsSuccessModalVisible(false)} />
-      </Modal>
-    );
-  };
-
   const onButtonPress = () => {
     navigation.navigate('settings');
   };
@@ -123,12 +139,28 @@ const Home = ({navigation}) => {
     <ScreenTemplate>
       <SettingsBtn onPress={onButtonPress} />
       <ScrollView>
-        {topUpModal()}
-        {newCardModal()}
-        {enterTokenModal()}
-        {successModal()}
+        <NewCardModal
+          isVisible={isNewCardModalVisible}
+          onSubmit={onAccept}
+          onClose={() => setIsNewCardModalVisible(false)}
+        />
+        <TopUpModal
+          isVisible={isTopUpModalVisible}
+          onSubmit={onTopUp}
+          onClose={() => setIsTopUpModalVisible(false)}
+        />
+        <EnterTokenModal
+          isVisible={isEnterTokenModalVisible}
+          onSubmit={onSuccess}
+          onClose={() => setIsEnterTokenModalVisible(false)}
+        />
+        <SuccessModal
+          isVisible={isSuccessModalVisible}
+          onSubmit={() => setIsSuccessModalVisible(false)}
+          onClose={() => setIsSuccessModalVisible(false)}
+        />
         <Products cards={eCard} action={() => setIsTopUpModalVisible(true)} />
-        {!eCard && <NewCardBtn action={onCreate} />}
+        {!eCard && <NewCardBtn action={() => setIsNewCardModalVisible(true)} />}
       </ScrollView>
     </ScreenTemplate>
   );
