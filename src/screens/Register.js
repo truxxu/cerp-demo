@@ -5,6 +5,7 @@ import {useForm} from 'react-hook-form';
 import {fonts, colors, margin} from '../styles/base.js';
 import {ScreenTemplate, Button, Logo, Modal} from '../atoms';
 import {Input} from '../molecules';
+import {SuccessModal} from '../organisms';
 
 const VerificationModal = ({isVisible, onClose, onSubmit}) => {
   const {
@@ -46,17 +47,6 @@ const VerificationModal = ({isVisible, onClose, onSubmit}) => {
   );
 };
 
-const SuccessModal = ({isVisible, onClose, onSubmit}) => (
-  <Modal isVisible={isVisible} close={onClose}>
-    <Text style={styles.title}>¡Verificación Correcta!</Text>
-    <Text style={styles.text}>
-      A continuación puedes iniciar sesión con tu correo y contraseña.
-    </Text>
-
-    <Button label="Continuar" action={onSubmit} />
-  </Modal>
-);
-
 const Register = ({navigation}) => {
   const {
     control,
@@ -93,8 +83,11 @@ const Register = ({navigation}) => {
       />
       <SuccessModal
         isVisible={isSucModalVisible}
-        onSubmit={() => onSubmitSucModal()}
+        onSubmit={onSubmitSucModal}
         onClose={() => setIsSucModalVisible(false)}
+        title="¡Verificación Correcta!"
+        text="A continuación puedes iniciar sesión con tu correo y contraseña."
+        btnLabel="Continuar"
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Logo size={120} />
