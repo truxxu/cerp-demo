@@ -2,51 +2,13 @@ import React, {useState, useContext} from 'react';
 import {Image, Pressable, Text, StyleSheet, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 
-import {ScreenTemplate, Button, Modal} from '../atoms';
+import {ScreenTemplate, Button} from '../atoms';
 import {Input} from '../molecules';
+import {VerificationModal} from '../organisms';
 import {fonts, colors, margin} from '../styles/base.js';
 import {UserContext} from '../context/user-context';
 
 import Logo from './../images/logo.png';
-
-const VerificationModal = ({isVisible, onClose, onSubmit}) => {
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: {isDirty, isValid},
-  } = useForm({
-    mode: 'onChange',
-  });
-
-  const onSubmitModal = () => {
-    reset();
-    onSubmit();
-  };
-
-  return (
-    <Modal isVisible={isVisible} close={onClose}>
-      <Text style={styles.text}>
-        Por favor ingresa a continuación el código de autenticación que enviamos
-        a tu celular.
-      </Text>
-      <View style={styles.formContainerModal}>
-        <Input
-          name="code"
-          label="Código de Autenticación"
-          placeholder="Ingresa tu código de autenticación"
-          keyboard="numeric"
-          control={control}
-        />
-      </View>
-      <Button
-        label="Autenticar"
-        action={handleSubmit(onSubmitModal)}
-        disabled={!isDirty || !isValid}
-      />
-    </Modal>
-  );
-};
 
 const Login = ({navigation}) => {
   const user = useContext(UserContext);
@@ -132,13 +94,5 @@ const styles = StyleSheet.create({
   image: {
     height: 100,
     resizeMode: 'contain',
-  },
-  formContainer: {
-    width: '100%',
-    marginVertical: margin.xl,
-  },
-  formContainerModal: {
-    width: '100%',
-    marginVertical: margin.md,
   },
 });
