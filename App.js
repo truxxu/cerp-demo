@@ -2,7 +2,14 @@ import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Home, Login, Register, Settings, Welcome} from './src/screens';
+import {
+  Home,
+  Login,
+  Register,
+  Settings,
+  Welcome,
+  Transfer,
+} from './src/screens';
 import {colors} from './src/styles/base.js';
 import {UserContext} from './src/context/user-context';
 
@@ -46,6 +53,11 @@ const App = () => {
               name="settings"
               component={Settings}
               options={{title: 'Settings'}}
+            />
+            <Stack.Screen
+              name="transfer"
+              component={Transfer}
+              options={{title: 'Transferir'}}
             />
           </>
         )}
