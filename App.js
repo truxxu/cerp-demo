@@ -9,6 +9,7 @@ import {
   Settings,
   Welcome,
   Transfer,
+  Pay,
 } from './src/screens';
 import {colors} from './src/styles/base.js';
 import {UserContext} from './src/context/user-context';
@@ -58,6 +59,11 @@ const App = () => {
               name="transfer"
               component={Transfer}
               options={{title: 'Transferir'}}
+            />
+            <Stack.Screen
+              name="pay"
+              component={Pay}
+              options={{title: 'Pagar'}}
             />
           </>
         )}

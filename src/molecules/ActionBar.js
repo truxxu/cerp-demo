@@ -24,7 +24,7 @@ const ActionBar = () => {
       <View style={styles.spacer} />
       <Pressable
         style={styles.btnContainer}
-        onPress={() => navigation.navigate('transfer')}>
+        onPress={() => navigation.navigate('pay')}>
         <Icon
           name="bank-transfer-in"
           color={colors.disabled2}
