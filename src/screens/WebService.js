@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {ActivityIndicator} from 'react-native';
 import {useForm} from 'react-hook-form';
 
 import {ScreenTemplate, Button} from '../atoms';
 import {Input} from '../molecules';
 import useResource from '../hooks/useResource';
+import {SuccessModal} from '../organisms';
+import {colors} from '../styles/base.js';
 
 const WebService = () => {
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
   const [send, isLoading, error, clear] = useResource();
 
   const {
@@ -32,6 +36,7 @@ const WebService = () => {
         }),
       );
       console.log(response);
+      setIsSuccessModalVisible(true);
     } catch (err) {
       console.log(err);
     }
@@ -39,6 +44,14 @@ const WebService = () => {
 
   return (
     <ScreenTemplate>
+      <SuccessModal
+        isVisible={isSuccessModalVisible}
+        onSubmit={() => setIsSuccessModalVisible(false)}
+        onClose={() => setIsSuccessModalVisible(false)}
+        title="¡Felicidades!"
+        text="Petición realizada exitosamente"
+        btnLabel="Aceptar"
+      />
       <Input
         name="amount"
         label="Monto"
@@ -52,11 +65,15 @@ const WebService = () => {
         placeholder="Ingresa el mensaje"
         control={control}
       />
-      <Button
-        label="Enviar"
-        action={handleSubmit(onSubmit)}
-        disabled={!isDirty || !isValid}
-      />
+      {isLoading ? (
+        <ActivityIndicator size={40} color={colors.primary} />
+      ) : (
+        <Button
+          label="Enviar"
+          action={handleSubmit(onSubmit)}
+          disabled={!isDirty || !isValid}
+        />
+      )}
     </ScreenTemplate>
   );
 };
