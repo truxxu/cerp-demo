@@ -52,7 +52,7 @@ const App = () => {
             <Stack.Screen
               name="settings"
               component={Settings}
-              options={{title: 'Settings'}}
+              options={{title: 'Ajustes'}}
             />
             <Stack.Screen
               name="transfer"
