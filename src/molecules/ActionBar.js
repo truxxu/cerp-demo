@@ -33,6 +33,18 @@ const ActionBar = () => {
         />
         <Text style={styles.label}>Pagar</Text>
       </Pressable>
+      <View style={styles.spacer} />
+      <Pressable
+        style={styles.btnContainer}
+        onPress={() => navigation.navigate('integration')}>
+        <Icon
+          name="web"
+          color={colors.disabled2}
+          size={25}
+          style={styles.icon}
+        />
+        <Text style={styles.label}>Integración</Text>
+      </Pressable>
     </View>
   );
 };
