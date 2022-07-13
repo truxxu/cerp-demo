@@ -1,55 +1,56 @@
-import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-// import {RNCamera} from 'react-native-camera';
+import {RNCamera} from 'react-native-camera';
 
-import {ScreenTemplate} from '../atoms';
+import {SuccessModal} from '../organisms';
 
-const Pay = () => {
+const Pay = ({navigation}) => {
+  const [isVerModalVisible, setIsVerModalVisible] = useState(false);
+  const [isSucModalVisible, setIsSucModalVisible] = useState(false);
+
   const onSuccess = e => {
     console.log('success!');
+    setIsVerModalVisible(true);
+  };
+
+  const onConfirm = () => {
+    setIsVerModalVisible(false);
+    setIsSucModalVisible(true);
   };
 
   return (
-    <ScreenTemplate>
+    <>
+      <SuccessModal
+        isVisible={isVerModalVisible}
+        onSubmit={onConfirm}
+        onClose={() => setIsVerModalVisible(false)}
+        title="Pagar $30.000"
+        text="Confirme para realizar el pago"
+        btnLabel="Confirmar"
+      />
+      <SuccessModal
+        isVisible={isSucModalVisible}
+        onSubmit={() => setIsSucModalVisible(false)}
+        onClose={() => setIsSucModalVisible(false)}
+        title="¡Pago Exitoso!"
+        text="Tu pago ha sido realizado con éxito"
+        btnLabel="Terminar"
+      />
       <QRCodeScanner
         onRead={onSuccess}
-        // flashMode={RNCamera.Constants.FlashMode.torch}
-        topContent={
-          <Text style={styles.centerText}>
-            Go to{' '}
-            <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-            your computer and scan the QR code.
-          </Text>
-        }
-        bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText}>OK. Got it!</Text>
-          </TouchableOpacity>
-        }
+        flashMode={RNCamera.Constants.FlashMode.torch}
+        showMarker={true}
+        containerStyle={styles.container}
       />
-    </ScreenTemplate>
+    </>
   );
 };
 
 export {Pay};
 
 const styles = StyleSheet.create({
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000',
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 16,
+  container: {
+    backgroundColor: 'black',
   },
 });
