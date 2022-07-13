@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-// import QRCodeScanner from 'react-native-qrcode-scanner';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 // import {RNCamera} from 'react-native-camera';
 
 import {ScreenTemplate} from '../atoms';
@@ -12,7 +12,7 @@ const Pay = () => {
 
   return (
     <ScreenTemplate>
-      {/* <QRCodeScanner
+      <QRCodeScanner
         onRead={onSuccess}
         // flashMode={RNCamera.Constants.FlashMode.torch}
         topContent={
@@ -27,7 +27,7 @@ const Pay = () => {
             <Text style={styles.buttonText}>OK. Got it!</Text>
           </TouchableOpacity>
         }
-      /> */}
+      />
     </ScreenTemplate>
   );
 };
