@@ -5,3 +5,4 @@ export * from './Settings';
 export * from './Welcome';
 export * from './Transfer';
 export * from './WebService';
+export * from './Pay';

@@ -80,9 +80,9 @@ const Home = ({navigation}) => {
 
   return (
     <ScreenTemplate>
-      <SettingsBtn onPress={onButtonPress} />
-      <ActionBar />
       <ScrollView>
+        <SettingsBtn onPress={onButtonPress} />
+        <ActionBar />
         <SuccessModal
           isVisible={isNewCardModalVisible}
           onSubmit={onAccept}

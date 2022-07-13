@@ -10,6 +10,7 @@ import {
   Welcome,
   Transfer,
   WebService,
+  Pay,
 } from './src/screens';
 import {colors} from './src/styles/base.js';
 import {UserContext} from './src/context/user-context';
@@ -39,17 +40,21 @@ const App = () => {
             <Stack.Screen
               name="register"
               component={Register}
-              options={{title: '', headerShown: false}}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="login"
               component={Login}
-              options={{title: '', headerShown: false}}
+              options={{headerShown: false}}
             />
           </>
         ) : (
           <>
-            <Stack.Screen name="home" component={Home} options={{title: ''}} />
+            <Stack.Screen
+              name="home"
+              component={Home}
+              options={{headerShown: false}}
+            />
             <Stack.Screen
               name="settings"
               component={Settings}
@@ -64,6 +69,11 @@ const App = () => {
               name="integration"
               component={WebService}
               options={{title: 'Integración WebService'}}
+            />
+            <Stack.Screen
+              name="pay"
+              component={Pay}
+              options={{title: 'Pagar'}}
             />
           </>
         )}
