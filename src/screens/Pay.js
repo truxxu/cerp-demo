@@ -4,10 +4,13 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 
 import {SuccessModal} from '../organisms';
+import {FlashBtn} from '../atoms';
+import {colors} from '../styles/base.js';
 
-const Pay = ({navigation}) => {
+const Pay = () => {
   const [isVerModalVisible, setIsVerModalVisible] = useState(false);
   const [isSucModalVisible, setIsSucModalVisible] = useState(false);
+  const [flash, setFlash] = useState(false);
 
   const onSuccess = e => {
     console.log('success!');
@@ -18,6 +21,14 @@ const Pay = ({navigation}) => {
     setIsVerModalVisible(false);
     setIsSucModalVisible(true);
   };
+
+  const handleFlash = () => {
+    setFlash(!flash);
+  };
+
+  const FlashMode = flash
+    ? RNCamera.Constants.FlashMode.torch
+    : RNCamera.Constants.FlashMode.off;
 
   return (
     <>
@@ -39,9 +50,11 @@ const Pay = ({navigation}) => {
       />
       <QRCodeScanner
         onRead={onSuccess}
-        flashMode={RNCamera.Constants.FlashMode.torch}
         showMarker={true}
         containerStyle={styles.container}
+        flashMode={FlashMode}
+        topContent={<FlashBtn action={handleFlash} flash={flash} />}
+        topViewStyle={styles.top}
       />
     </>
   );
@@ -51,6 +64,9 @@ export {Pay};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: colors.secondary,
+  },
+  top: {
+    justifyContent: 'flex-start',
   },
 });
