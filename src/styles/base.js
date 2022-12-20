@@ -27,5 +27,5 @@ export const fonts = {
   md: 21,
   lg: 28,
   xl: 35,
-  primary: 'vcr_osd_mono',
+  // primary: 'vcr_osd_mono',
 };
