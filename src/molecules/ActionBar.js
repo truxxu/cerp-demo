@@ -1,61 +1,67 @@
 import React from 'react';
-import {StyleSheet, Text, View, Pressable} from 'react-native';
+import {StyleSheet, Text, View, Pressable, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
-import {colors} from '../styles/base.js';
+import {colors, margin} from '../styles/base.js';
+
+const TABS = [
+  {
+    label: 'Payzen',
+    navigateTo: 'transfer',
+    icon: 'credit-card',
+  },
+  {
+    label: 'Transferir',
+    navigateTo: 'transfer',
+    icon: 'bank-transfer-out',
+  },
+  {
+    label: 'Pagar',
+    navigateTo: 'pay',
+    icon: 'bank-transfer-in',
+  },
+  {
+    label: 'Integración',
+    navigateTo: 'integration',
+    icon: 'web',
+  },
+  {
+    label: 'Ajustes',
+    navigateTo: 'settings',
+    icon: 'cog',
+  },
+];
 
 const ActionBar = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <Pressable
-        style={styles.btnContainer}
-        onPress={() => navigation.navigate('transfer')}>
-        <Icon
-          name="bank-transfer-out"
-          color={colors.disabled2}
-          size={25}
-          style={styles.icon}
-        />
-        <Text style={styles.label}>Transferir</Text>
-      </Pressable>
-      <View style={styles.spacer} />
-      <Pressable
-        style={styles.btnContainer}
-        onPress={() => navigation.navigate('pay')}>
-        <Icon
-          name="bank-transfer-in"
-          color={colors.disabled2}
-          size={25}
-          style={styles.icon}
-        />
-        <Text style={styles.label}>Pagar</Text>
-      </Pressable>
-      <View style={styles.spacer} />
-      <Pressable
-        style={styles.btnContainer}
-        onPress={() => navigation.navigate('integration')}>
-        <Icon
-          name="web"
-          color={colors.disabled2}
-          size={25}
-          style={styles.icon}
-        />
-        <Text style={styles.label}>Integración</Text>
-      </Pressable>
-    </View>
+    <ScrollView horizontal>
+      {TABS.map((item, index) => {
+        return (
+          <View key={index} style={styles.btn}>
+            <Pressable
+              style={styles.btnContainer}
+              onPress={() => navigation.navigate(item.navigateTo)}>
+              <Icon
+                name={item.icon}
+                color={colors.disabled2}
+                size={25}
+                style={styles.icon}
+              />
+              <Text style={styles.label}>{item.label}</Text>
+            </Pressable>
+          </View>
+        );
+      })}
+    </ScrollView>
   );
 };
 
 export {ActionBar};
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flexDirection: 'row',
-  },
   btnContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -65,8 +71,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: colors.disabled2,
   },
-  spacer: {
-    width: 15,
+  btn: {
+    marginRight: margin.sm,
   },
   label: {
     color: colors.text,
