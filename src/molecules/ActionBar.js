@@ -8,7 +8,7 @@ import {colors, margin} from '../styles/base.js';
 const TABS = [
   {
     label: 'Payzen',
-    navigateTo: 'transfer',
+    navigateTo: 'products',
     icon: 'credit-card',
   },
   {
