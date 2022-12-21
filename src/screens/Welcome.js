@@ -3,7 +3,7 @@ import {Image, StyleSheet} from 'react-native';
 
 import {ScreenTemplate} from '../atoms';
 
-import Logo from './../images/logo.png';
+import Logo from './../images/logo3.png';
 
 const Welcome = ({navigation}) => {
   useEffect(() => {
@@ -27,7 +27,7 @@ export {Welcome};
 
 const styles = StyleSheet.create({
   image: {
-    height: 150,
+    height: 300,
     resizeMode: 'contain',
   },
 });
