@@ -3,8 +3,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-import {fonts, colors, margin, padding} from '../styles/base.js';
+import {colors, margin, padding} from '../styles/base.js';
 import {Input} from './Input';
+import {parseAmount} from '../utils/parsing.js';
 
 const PayzenCard = ({data}) => {
   const {
@@ -30,11 +31,12 @@ const PayzenCard = ({data}) => {
         label="Número de producto"
         placeholder={data.numProd}
         control={control}
+        editable={false}
       />
       <Input
         name="pagoMin"
         label="Pago mínimo"
-        placeholder="1.000"
+        placeholder={parseAmount(data.pagoMin / 100)}
         keyboard="numeric"
         control={control}
       />
@@ -43,6 +45,7 @@ const PayzenCard = ({data}) => {
         label="Valor a pagar"
         placeholder="1.000"
         control={control}
+        editable={false}
       />
     </View>
   );

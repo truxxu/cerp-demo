@@ -7,10 +7,23 @@ export const UserContext = createContext({
   isloadingConfig: false,
   logout: () => {},
   completeSetup: () => {},
+  addProduct: () => {},
+  removeProduct: () => {},
+  updateProduct: () => {},
+  clearSelection: () => {},
 });
 
 export const UserContextProvider = ({children}) => {
-  const {firstTime, isloadingConfig, logout, completeSetup} = useSettings();
+  const {
+    firstTime,
+    isloadingConfig,
+    logout,
+    completeSetup,
+    addProduct,
+    removeProduct,
+    updateProduct,
+    clearSelection,
+  } = useSettings();
 
   return (
     <UserContext.Provider
@@ -19,6 +32,10 @@ export const UserContextProvider = ({children}) => {
         isloadingConfig,
         logout,
         completeSetup,
+        addProduct,
+        removeProduct,
+        updateProduct,
+        clearSelection,
       }}>
       {children}
     </UserContext.Provider>

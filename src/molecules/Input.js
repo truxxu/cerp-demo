@@ -4,7 +4,15 @@ import {Controller} from 'react-hook-form';
 
 import {fonts, colors, margin, padding} from '../styles/base.js';
 
-const Input = ({name, label, placeholder, keyboard, control, isSecure}) => {
+const Input = ({
+  name,
+  label,
+  placeholder,
+  keyboard,
+  control,
+  isSecure,
+  editable = true,
+}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -15,14 +23,15 @@ const Input = ({name, label, placeholder, keyboard, control, isSecure}) => {
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
-            style={styles.input}
+            style={[styles.input, !editable && styles.disabled]}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             keyboardType={keyboard}
             placeholder={placeholder}
-            placeholderTextColor={colors.disabled2}
             secureTextEntry={isSecure}
+            editable={editable}
+            placeholderTextColor={colors.disabled}
           />
         )}
         name={name}
@@ -53,5 +62,8 @@ const styles = StyleSheet.create({
     borderColor: colors.disabled2,
     paddingHorizontal: padding.sm,
     paddingVertical: padding.xs,
+  },
+  disabled: {
+    backgroundColor: colors.disabled2,
   },
 });

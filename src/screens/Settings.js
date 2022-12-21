@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {BackHandler, Text, Pressable, StyleSheet, View} from 'react-native';
+import {Text, Pressable, StyleSheet, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 
 import {ScreenTemplate, Button} from '../atoms';
@@ -21,7 +21,6 @@ const Settings = () => {
 
   const onLogout = () => {
     user.logout();
-    BackHandler.exitApp();
   };
 
   const onSubmit = () => {
