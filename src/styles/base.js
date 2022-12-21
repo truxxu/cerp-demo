@@ -1,6 +1,6 @@
 export const colors = {
-  primary: '#8F23D6',
-  secondary: '#F8F8FF',
+  primary: '#1D4E8F',
+  secondary: 'white',
   disabled: 'gray',
   disabled2: 'lightgray',
   text: 'black',
@@ -27,5 +27,5 @@ export const fonts = {
   md: 21,
   lg: 28,
   xl: 35,
-  primary: 'vcr_osd_mono',
+  // primary: 'vcr_osd_mono',
 };

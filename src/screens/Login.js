@@ -8,7 +8,7 @@ import {VerificationModal} from '../organisms';
 import {fonts, colors, margin} from '../styles/base.js';
 import {UserContext} from '../context/user-context';
 
-import Logo from './../images/logo.png';
+import Logo from './../images/logo5.png';
 
 const Login = ({navigation}) => {
   const user = useContext(UserContext);
@@ -40,8 +40,6 @@ const Login = ({navigation}) => {
         onClose={() => setIsModalVisible(false)}
       />
       <Image style={styles.image} source={Logo} />
-      <Text style={[styles.text, styles.title]}>¡Bienvenido!</Text>
-
       <View style={styles.formContainer}>
         <Input
           name="id"
@@ -75,24 +73,14 @@ const Login = ({navigation}) => {
 export {Login};
 
 const styles = StyleSheet.create({
-  title: {
-    color: colors.primary,
-    fontSize: fonts.xl,
-    fontFamily: fonts.primary,
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: fonts.sm,
-    fontFamily: fonts.primary,
-    color: colors.text,
-  },
   link: {
     color: colors.primary,
     fontSize: fonts.sm,
     marginTop: margin.md,
   },
   image: {
-    height: 100,
+    marginBottom: margin.md,
+    height: 120,
     resizeMode: 'contain',
   },
 });
