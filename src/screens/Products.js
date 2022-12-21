@@ -23,6 +23,8 @@ const Products = ({navigation}) => {
         renderItem={({item}) => <PayzenCard data={item} />}
         keyExtractor={item => item.numProd}
         ItemSeparatorComponent={Separator}
+        ListHeaderComponent={Separator}
+        ListFooterComponent={Separator}
       />
       <Button label="Continuar" action={onContinue} />
     </ScreenTemplate>
@@ -33,6 +35,6 @@ export {Products};
 
 const styles = StyleSheet.create({
   spacer: {
-    height: 20,
+    height: 25,
   },
 });

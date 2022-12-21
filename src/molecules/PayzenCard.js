@@ -59,6 +59,12 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: margin.sm,
+    position: 'absolute',
+    top: -13,
+    left: 10,
+    zIndex: 9,
+    backgroundColor: colors.secondary,
+    paddingHorizontal: padding.xs,
   },
   headerText: {
     textDecorationLine: 'none',
