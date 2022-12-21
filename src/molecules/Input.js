@@ -4,25 +4,41 @@ import {Controller} from 'react-hook-form';
 
 import {fonts, colors, margin, padding} from '../styles/base.js';
 
-const Input = ({name, label, placeholder, keyboard, control, isSecure}) => {
+const Input = ({
+  name,
+  label,
+  placeholder,
+  keyboard,
+  control,
+  isSecure,
+  editable = true,
+  action,
+}) => {
+  const handleChange = e => {
+    action(e);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <Controller
         control={control}
+        defaultValue={placeholder}
         rules={{
           required: true,
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
-            style={styles.input}
+            style={[styles.input, !editable && styles.disabled]}
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChangeText={e => {
+              onChange(e);
+              handleChange(e);
+            }}
             value={value}
             keyboardType={keyboard}
-            placeholder={placeholder}
-            placeholderTextColor={colors.disabled2}
             secureTextEntry={isSecure}
+            editable={editable}
           />
         )}
         name={name}
@@ -35,7 +51,7 @@ export {Input};
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: margin.md,
+    marginBottom: margin.sm,
     width: '100%',
   },
   label: {
@@ -51,6 +67,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: colors.disabled2,
-    paddingHorizontal: padding.md,
+    paddingHorizontal: padding.sm,
+    paddingVertical: padding.xs,
+  },
+  disabled: {
+    backgroundColor: colors.disabled2,
   },
 });
