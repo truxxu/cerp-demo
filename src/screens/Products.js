@@ -1,19 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text, FlatList, View} from 'react-native';
+import {StyleSheet, FlatList, View} from 'react-native';
 
 import PRODUCTS from './PayzenProducts.json';
-import {ScreenTemplate, Button} from '../atoms';
-import {PayzenCard} from '../molecules';
+import {ScreenTemplate} from '../atoms';
+import {PayzenCard, TotalBar} from '../molecules';
 
-const Products = ({navigation}) => {
+const Products = () => {
   const data = PRODUCTS.cuentas;
-
-  const onContinue = () => {
-    navigation.navigate('selection');
-  };
 
   const Separator = () => {
     return <View style={styles.spacer} />;
+  };
+
+  const ListSeparator = () => {
+    return <View style={styles.listSpacer} />;
   };
 
   return (
@@ -23,10 +23,10 @@ const Products = ({navigation}) => {
         renderItem={({item}) => <PayzenCard data={item} />}
         keyExtractor={item => item.numProd}
         ItemSeparatorComponent={Separator}
-        ListHeaderComponent={Separator}
-        ListFooterComponent={Separator}
+        ListHeaderComponent={ListSeparator}
+        ListFooterComponent={ListSeparator}
       />
-      <Button label="Continuar" action={onContinue} />
+      <TotalBar />
     </ScreenTemplate>
   );
 };
@@ -36,5 +36,8 @@ export {Products};
 const styles = StyleSheet.create({
   spacer: {
     height: 25,
+  },
+  listSpacer: {
+    height: 15,
   },
 });

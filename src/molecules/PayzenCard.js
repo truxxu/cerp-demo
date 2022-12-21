@@ -68,5 +68,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     textDecorationLine: 'none',
+    color: colors.primary,
+    fontWeight: 'bold',
   },
 });
