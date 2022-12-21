@@ -1,21 +1,24 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, FlatList} from 'react-native';
 
+import PRODUCTS from './PayzenProducts.json';
 import {ScreenTemplate, Button} from '../atoms';
+import {PayzenCard} from '../molecules';
 
 const Products = ({navigation}) => {
+  const data = PRODUCTS.cuentas;
+
   const onContinue = () => {
     navigation.navigate('selection');
   };
 
   return (
     <ScreenTemplate>
-      <Text>Products List</Text>
-      <Text>Item 1</Text>
-      <Text>Item 1</Text>
-      <Text>Item 1</Text>
-      <Text>Item 1</Text>
-      <Text>Item 1</Text>
+      <FlatList
+        data={data}
+        renderItem={({item}) => <PayzenCard data={item} />}
+        keyExtractor={item => item.numProd}
+      />
       <Button label="Continuar" action={onContinue} />
     </ScreenTemplate>
   );

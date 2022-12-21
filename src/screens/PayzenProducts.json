@@ -1,0 +1,39 @@
+{
+  "cuentas": [
+    {
+      "tipoProd": "PU",
+      "descProd": "PAGO UNICO",
+      "numProd": "41936672",
+      "pagoMin": 11900000,
+      "aliasProd": "PAGO APORTES Y CARTERA"
+    },
+    {
+      "tipoProd": "AH",
+      "descProd": "DIARIO",
+      "numProd": "033020002685",
+      "pagoMin": 16602273,
+      "aliasProd": "********2685"
+    },
+    {
+      "tipoProd": "AH",
+      "descProd": "COASMEDITO",
+      "numProd": "033110001415",
+      "pagoMin": 7211980,
+      "aliasProd": "********1415"
+    },
+    {
+      "tipoProd": "AH",
+      "descProd": "COASMEDITO",
+      "numProd": "033110002111",
+      "pagoMin": 2353300,
+      "aliasProd": "********2111"
+    },
+    {
+      "tipoProd": "SG",
+      "descProd": "SV212022__",
+      "numProd": "0332021004531",
+      "pagoMin": 21487200,
+      "aliasProd": "------------------------DTR464"
+    }
+  ]
+}
