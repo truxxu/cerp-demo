@@ -5,6 +5,7 @@ import {useSettings} from '../hooks/useSettings';
 export const UserContext = createContext({
   firstTime: 'true',
   isloadingConfig: false,
+  selectedProducts: null,
   logout: () => {},
   completeSetup: () => {},
   addProduct: () => {},
@@ -17,6 +18,7 @@ export const UserContextProvider = ({children}) => {
   const {
     firstTime,
     isloadingConfig,
+    selectedProducts,
     logout,
     completeSetup,
     addProduct,
@@ -30,6 +32,7 @@ export const UserContextProvider = ({children}) => {
       value={{
         firstTime,
         isloadingConfig,
+        selectedProducts,
         logout,
         completeSetup,
         addProduct,

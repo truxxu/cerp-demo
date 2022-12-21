@@ -1,13 +1,20 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 import {colors, margin, padding} from '../styles/base.js';
 import {Input} from './Input';
 import {parseAmount} from '../utils/parsing.js';
+import {UserContext} from '../context/user-context';
 
 const PayzenCard = ({data}) => {
+  const {descProd, numProd, pagoMin, tipoProd} = data;
+  const user = useContext(UserContext);
+  const [amount, setAmount] = useState(pagoMin);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const parsedAmount = parseAmount(amount);
+
   const {
     control,
     handleSubmit,
@@ -17,14 +24,30 @@ const PayzenCard = ({data}) => {
     mode: 'onChange',
   });
 
+  useEffect(() => {
+    if (isEnabled) {
+      user.addProduct({amount, descProd, numProd, tipoProd});
+    } else {
+      user.removeProduct(numProd);
+    }
+  }, [isEnabled]);
+
+  const handleChange = e => {
+    setAmount(parseInt(e));
+    user.updateProduct(parseInt(e), numProd);
+  };
+
+  const handleCheckbox = () => setIsEnabled(!isEnabled);
+
   return (
     <View style={styles.container}>
       <BouncyCheckbox
-        onPress={() => console.log('checked!')}
+        onPress={handleCheckbox}
         textStyle={styles.headerText}
         fillColor={colors.primary}
         text={data.descProd}
         style={styles.header}
+        isChecked={isEnabled}
       />
       <Input
         name="numProd"
@@ -36,14 +59,16 @@ const PayzenCard = ({data}) => {
       <Input
         name="pagoMin"
         label="Pago mínimo"
-        placeholder={parseAmount(data.pagoMin / 100)}
+        placeholder={parsedAmount}
         keyboard="numeric"
         control={control}
+        action={handleChange}
+        editable={isEnabled}
       />
       <Input
         name="total"
         label="Valor a pagar"
-        placeholder="1.000"
+        placeholder={parsedAmount}
         control={control}
         editable={false}
       />

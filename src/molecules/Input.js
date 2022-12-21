@@ -12,7 +12,12 @@ const Input = ({
   control,
   isSecure,
   editable = true,
+  action,
 }) => {
+  const handleChange = e => {
+    action(e);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -25,7 +30,10 @@ const Input = ({
           <TextInput
             style={[styles.input, !editable && styles.disabled]}
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChangeText={e => {
+              onChange();
+              handleChange(e);
+            }}
             value={value}
             keyboardType={keyboard}
             placeholder={placeholder}

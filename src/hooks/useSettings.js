@@ -74,6 +74,7 @@ export const useSettings = () => {
   return {
     firstTime,
     isloadingConfig,
+    selectedProducts,
     logout,
     completeSetup,
     configSetup,

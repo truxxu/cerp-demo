@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {colors, padding, fonts, margin} from '../styles/base.js';
+import {parseAmount} from '../utils/parsing.js';
 
 const TotalBar = ({data = '10.000'}) => {
   const navigation = useNavigation();
@@ -14,7 +15,7 @@ const TotalBar = ({data = '10.000'}) => {
   if (data) {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Total: ${data}</Text>
+        <Text style={styles.text}>Total: $ {parseAmount(data)}</Text>
         <Pressable style={styles.button} onPress={onPressHandler}>
           <Text style={styles.text}>Continuar</Text>
         </Pressable>
