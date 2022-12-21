@@ -35,7 +35,7 @@ export {Input};
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: margin.md,
+    marginBottom: margin.sm,
     width: '100%',
   },
   label: {
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: colors.disabled2,
-    paddingHorizontal: padding.md,
+    paddingHorizontal: padding.sm,
+    paddingVertical: padding.xs,
   },
 });

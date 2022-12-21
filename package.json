@@ -20,6 +20,7 @@
     "react": "18.0.0",
     "react-hook-form": "^7.33.0",
     "react-native": "0.69.1",
+    "react-native-bouncy-checkbox": "^3.0.6",
     "react-native-camera": "^4.2.1",
     "react-native-modal": "^13.0.1",
     "react-native-permissions": "^3.4.0",

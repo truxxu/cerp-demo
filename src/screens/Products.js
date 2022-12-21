@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, FlatList} from 'react-native';
+import {StyleSheet, Text, FlatList, View} from 'react-native';
 
 import PRODUCTS from './PayzenProducts.json';
 import {ScreenTemplate, Button} from '../atoms';
@@ -12,12 +12,17 @@ const Products = ({navigation}) => {
     navigation.navigate('selection');
   };
 
+  const Separator = () => {
+    return <View style={styles.spacer} />;
+  };
+
   return (
     <ScreenTemplate>
       <FlatList
         data={data}
         renderItem={({item}) => <PayzenCard data={item} />}
         keyExtractor={item => item.numProd}
+        ItemSeparatorComponent={Separator}
       />
       <Button label="Continuar" action={onContinue} />
     </ScreenTemplate>
@@ -26,4 +31,8 @@ const Products = ({navigation}) => {
 
 export {Products};
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  spacer: {
+    height: 20,
+  },
+});
