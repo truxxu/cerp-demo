@@ -23,6 +23,7 @@ const Input = ({
       <Text style={styles.label}>{label}</Text>
       <Controller
         control={control}
+        defaultValue={placeholder}
         rules={{
           required: true,
         }}
@@ -31,15 +32,13 @@ const Input = ({
             style={[styles.input, !editable && styles.disabled]}
             onBlur={onBlur}
             onChangeText={e => {
-              onChange();
+              onChange(e);
               handleChange(e);
             }}
             value={value}
             keyboardType={keyboard}
-            placeholder={placeholder}
             secureTextEntry={isSecure}
             editable={editable}
-            placeholderTextColor={colors.disabled}
           />
         )}
         name={name}
