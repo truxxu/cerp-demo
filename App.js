@@ -11,6 +11,9 @@ import {
   Transfer,
   WebService,
   Pay,
+  Products,
+  Selection,
+  PaymentDetails,
 } from './src/screens';
 import {colors} from './src/styles/base.js';
 import {UserContext} from './src/context/user-context';
@@ -74,6 +77,21 @@ const App = () => {
               name="pay"
               component={Pay}
               options={{title: 'Pagar'}}
+            />
+            <Stack.Screen
+              name="products"
+              component={Products}
+              options={{title: 'Productos'}}
+            />
+            <Stack.Screen
+              name="selection"
+              component={Selection}
+              options={{title: 'Productos a pagar'}}
+            />
+            <Stack.Screen
+              name="payment"
+              component={PaymentDetails}
+              options={{title: 'Detalles del pago'}}
             />
           </>
         )}

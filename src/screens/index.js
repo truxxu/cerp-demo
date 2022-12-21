@@ -6,3 +6,6 @@ export * from './Welcome';
 export * from './Transfer';
 export * from './WebService';
 export * from './Pay';
+export * from './Products';
+export * from './PaymentDetails';
+export * from './Selection';
