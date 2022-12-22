@@ -52,23 +52,23 @@ const PayzenCard = ({data}) => {
       <Input
         name="numProd"
         label="Número de producto"
-        placeholder={data.numProd}
+        value={data.numProd}
         control={control}
         editable={false}
       />
       <Input
         name="pagoMin"
         label="Pago mínimo"
-        placeholder={parsedAmount}
         keyboard="numeric"
         control={control}
         action={handleChange}
         editable={isEnabled}
+        value={parsedAmount}
       />
       <Input
         name="total"
         label="Valor a pagar"
-        placeholder={parsedAmount}
+        value={parsedAmount}
         control={control}
         editable={false}
       />
