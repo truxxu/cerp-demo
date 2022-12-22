@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView, Pressable} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Pressable,
+  Linking,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useForm} from 'react-hook-form';
 
@@ -43,6 +50,8 @@ const ID = [
 ];
 
 const PaymentDetails = ({navigation}) => {
+  const url = 'http://www.google.com';
+
   const {
     control,
     handleSubmit,
@@ -52,9 +61,9 @@ const PaymentDetails = ({navigation}) => {
     mode: 'onChange',
   });
 
-  const onContinue = () => {
+  const onContinue = async () => {
     reset();
-    console.log('go to payzen');
+    await Linking.openURL(url);
   };
 
   return (
