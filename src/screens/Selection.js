@@ -6,7 +6,7 @@ import {ScreenTemplate, Button} from '../atoms';
 import {UserContext} from '../context/user-context';
 import {SelectedProduct} from '../molecules';
 import {parseAmount} from '../utils/parsing.js';
-import {colors, margin, padding, fonts} from '../styles/base.js';
+import {colors, margin, fonts} from '../styles/base.js';
 
 const Selection = ({navigation}) => {
   const user = useContext(UserContext);

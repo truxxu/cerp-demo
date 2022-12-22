@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
-import {StyleSheet, FlatList, View} from 'react-native';
+import {StyleSheet, FlatList, View, Text} from 'react-native';
 
 import PRODUCTS from './PayzenProducts.json';
 import {ScreenTemplate} from '../atoms';
 import {PayzenCard, TotalBar} from '../molecules';
 import {UserContext} from '../context/user-context';
+import {colors, margin} from '../styles/base.js';
 
 const Products = () => {
   const data = PRODUCTS.cuentas;
@@ -24,6 +25,9 @@ const Products = () => {
 
   return (
     <ScreenTemplate>
+      <Text style={styles.text}>
+        Seleccione el tipo de pago que desea realizar:
+      </Text>
       <FlatList
         data={data}
         renderItem={({item}) => <PayzenCard data={item} />}
@@ -45,5 +49,9 @@ const styles = StyleSheet.create({
   },
   listSpacer: {
     height: 15,
+  },
+  text: {
+    color: colors.text,
+    marginBottom: margin.md,
   },
 });
