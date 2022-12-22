@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.secondary,
     fontSize: fonts.sm,
-    fontWeight: 'bold',
+    fontFamily: fonts.primary,
   },
   button: {
     borderWidth: 1,

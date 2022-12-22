@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.text,
     marginLeft: margin.sm,
+    fontFamily: fonts.primary,
   },
   textContainer: {
     display: 'flex',
@@ -171,6 +172,7 @@ const styles = StyleSheet.create({
     fontSize: fonts.sm,
     marginTop: margin.md,
     textAlign: 'center',
+    fontFamily: fonts.primary,
   },
   form: {
     marginVertical: margin.md,

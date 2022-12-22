@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-import {colors, margin, padding} from '../styles/base.js';
+import {colors, margin, padding, fonts} from '../styles/base.js';
 import {Input} from './Input';
 import {parseAmount} from '../utils/parsing.js';
 import {UserContext} from '../context/user-context';
@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
   headerText: {
     textDecorationLine: 'none',
     color: colors.primary,
-    fontWeight: 'bold',
+    fontFamily: fonts.primary,
   },
 });

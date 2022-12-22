@@ -5,7 +5,7 @@ import PRODUCTS from './PayzenProducts.json';
 import {ScreenTemplate} from '../atoms';
 import {PayzenCard, TotalBar} from '../molecules';
 import {UserContext} from '../context/user-context';
-import {colors, margin} from '../styles/base.js';
+import {colors, margin, fonts} from '../styles/base.js';
 
 const Products = () => {
   const data = PRODUCTS.cuentas;
@@ -53,5 +53,6 @@ const styles = StyleSheet.create({
   text: {
     color: colors.text,
     marginBottom: margin.md,
+    fontFamily: fonts.primary,
   },
 });

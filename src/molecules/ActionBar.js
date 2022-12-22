@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Pressable, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
-import {colors, margin} from '../styles/base.js';
+import {colors, margin, fonts} from '../styles/base.js';
 
 const TABS = [
   {
@@ -71,5 +71,6 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.text,
+    fontFamily: fonts.primary,
   },
 });

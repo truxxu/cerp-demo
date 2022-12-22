@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     fontSize: fonts.md,
     fontFamily: fonts.primary,
     marginTop: margin.md,
-    fontWeight: 'bold',
   },
   label: {
     color: colors.text,

@@ -54,13 +54,14 @@ const styles = StyleSheet.create({
   totalText: {
     fontSize: fonts.md,
     color: colors.primary,
-    fontWeight: 'bold',
+    fontFamily: fonts.primary,
     textAlign: 'right',
     marginVertical: margin.md,
   },
   text: {
     color: colors.text,
     marginLeft: margin.sm,
+    fontFamily: fonts.primary,
   },
   textContainer: {
     display: 'flex',
@@ -73,5 +74,6 @@ const styles = StyleSheet.create({
     fontSize: fonts.sm,
     marginTop: margin.md,
     textAlign: 'center',
+    fontFamily: fonts.primary,
   },
 });
