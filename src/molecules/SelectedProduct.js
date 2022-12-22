@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 
 import {parseAmount} from '../utils/parsing.js';
@@ -16,21 +16,21 @@ const SelectedProduct = ({data}) => {
       <Input
         name="descProd"
         label="Producto"
-        placeholder={descProd}
+        value={descProd}
         control={control}
         editable={false}
       />
       <Input
         name="numProd"
         label="Número de producto"
-        placeholder={numProd}
+        value={numProd}
         control={control}
         editable={false}
       />
       <Input
         name="amount"
         label="Valor a pagar"
-        placeholder={`$ ${parseAmount(amount)}`}
+        value={`$ ${parseAmount(amount)}`}
         control={control}
         editable={false}
       />

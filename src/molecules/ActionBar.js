@@ -46,7 +46,7 @@ const ActionBar = () => {
               onPress={() => navigation.navigate(item.navigateTo)}>
               <Icon
                 name={item.icon}
-                color={colors.disabled2}
+                color={colors.primary}
                 size={25}
                 style={styles.icon}
               />

@@ -51,11 +51,11 @@ export {Products};
 
 const styles = StyleSheet.create({
   title: {
-    color: colors.text,
-    fontSize: fonts.lg,
+    color: colors.primary,
+    fontSize: fonts.md,
     fontFamily: fonts.primary,
-    marginBottom: margin.sm,
     marginTop: margin.md,
+    fontWeight: 'bold',
   },
   label: {
     color: colors.text,
