@@ -37,7 +37,7 @@ export {DropDown};
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginBottom: margin.md,
+    marginBottom: margin.sm,
   },
   pickerItem: {
     color: colors.text,

@@ -124,7 +124,6 @@ const PaymentDetails = ({navigation}) => {
           <Text style={styles.link}>Volver</Text>
         </Pressable>
       </ScrollView>
-      <Text>PaymentDetails</Text>
     </ScreenTemplate>
   );
 };
