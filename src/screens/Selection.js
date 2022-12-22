@@ -41,7 +41,7 @@ const Selection = ({navigation}) => {
         </Text>
         <Button label="Continuar" action={onContinue} />
         <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.link}>Atrás</Text>
+          <Text style={styles.link}>Volver</Text>
         </Pressable>
       </ScrollView>
     </ScreenTemplate>
