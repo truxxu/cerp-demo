@@ -5,7 +5,42 @@ import {useForm} from 'react-hook-form';
 
 import {ScreenTemplate, Button} from '../atoms';
 import {colors, margin, fonts} from '../styles/base.js';
-import {Input} from '../molecules';
+import {Input, DropDown} from '../molecules';
+
+const ID = [
+  {
+    value: 'select',
+    label: 'Seleccione su tipo de documento',
+  },
+  {
+    value: 'cc',
+    label: 'Cédula de Ciudadanía',
+  },
+  {
+    value: 'nit',
+    label: 'NIT',
+  },
+  {
+    value: 'ce',
+    label: 'Cédula de Extranjería',
+  },
+  {
+    value: 'ti',
+    label: 'Tarjeta de Identidad',
+  },
+  {
+    value: 'pasaporte',
+    label: 'Pasaporte',
+  },
+  {
+    value: 'nuip',
+    label: 'NUIP',
+  },
+  {
+    value: 'registro',
+    label: 'Registro Civil',
+  },
+];
 
 const PaymentDetails = ({navigation}) => {
   const {
@@ -37,6 +72,7 @@ const PaymentDetails = ({navigation}) => {
           </Text>
         </View>
         <View style={styles.form}>
+          <DropDown label="Tipo de documento" data={ID} />
           <Input
             name="id"
             label="Número de documento"

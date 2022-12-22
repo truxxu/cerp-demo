@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: colors.disabled2,
     paddingHorizontal: padding.sm,
-    paddingVertical: padding.xs,
+    paddingVertical: padding.sm,
   },
   disabled: {
     backgroundColor: colors.disabled2,
