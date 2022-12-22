@@ -5,8 +5,9 @@ import {useNavigation} from '@react-navigation/native';
 import {colors, padding, fonts, margin} from '../styles/base.js';
 import {parseAmount} from '../utils/parsing.js';
 
-const TotalBar = ({data = '10.000'}) => {
+const TotalBar = ({data, count}) => {
   const navigation = useNavigation();
+  console.log(count);
 
   const onPressHandler = () => {
     navigation.navigate('selection');
@@ -15,10 +16,13 @@ const TotalBar = ({data = '10.000'}) => {
   if (data) {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Total: $ {parseAmount(data)}</Text>
-        <Pressable style={styles.button} onPress={onPressHandler}>
-          <Text style={styles.text}>Continuar</Text>
-        </Pressable>
+        <Text style={styles.text2}>Has seleccionado {count} producto(s)</Text>
+        <View style={styles.btn}>
+          <Text style={styles.text}>Total: ${parseAmount(data)}</Text>
+          <Pressable style={styles.button} onPress={onPressHandler}>
+            <Text style={styles.text}>Continuar</Text>
+          </Pressable>
+        </View>
       </View>
     );
   }
@@ -30,15 +34,22 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary,
     padding: padding.sm,
+    marginTop: margin.xs,
+  },
+  btn: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: margin.xs,
   },
   text: {
     color: colors.secondary,
     fontSize: fonts.sm,
+    fontFamily: fonts.primary,
+  },
+  text2: {
+    color: colors.secondary,
+    fontSize: fonts.xs,
     fontFamily: fonts.primary,
   },
   button: {

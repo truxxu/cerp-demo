@@ -24,6 +24,8 @@ const Products = () => {
     return total + product.amount;
   }, 0);
 
+  const count = user.selectedProducts.length;
+
   useFocusEffect(
     useCallback(() => {
       user.clearSelection();
@@ -43,7 +45,7 @@ const Products = () => {
         ListHeaderComponent={ListSeparator}
         ListFooterComponent={ListSeparator}
       />
-      <TotalBar data={total} />
+      <TotalBar data={total} count={count} />
     </ScreenTemplate>
   );
 };
