@@ -4,3 +4,4 @@ export * from './DropDown';
 export * from './ActionBar';
 export * from './PayzenCard';
 export * from './TotalBar';
+export * from './SelectedProduct';
