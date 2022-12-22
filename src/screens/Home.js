@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Text, StyleSheet, ScrollView} from 'react-native';
 import {useForm} from 'react-hook-form';
 
-import {ScreenTemplate, Modal, Button} from '../atoms';
+import {ScreenTemplate, Modal, Button, SettingsBtn} from '../atoms';
 import {NewCardBtn, Input, DropDown, ActionBar} from '../molecules';
 import {Products, SuccessModal, VerificationModal} from '../organisms';
 import {fonts, colors, margin} from '../styles/base.js';
@@ -77,6 +77,7 @@ const Home = ({navigation}) => {
   return (
     <ScreenTemplate>
       <ScrollView>
+        <SettingsBtn />
         <ActionBar />
         <SuccessModal
           isVisible={isNewCardModalVisible}

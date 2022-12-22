@@ -26,11 +26,6 @@ const TABS = [
     navigateTo: 'integration',
     icon: 'web',
   },
-  {
-    label: 'Ajustes',
-    navigateTo: 'settings',
-    icon: 'cog',
-  },
 ];
 
 const ActionBar = () => {
