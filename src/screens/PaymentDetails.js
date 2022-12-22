@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,7 @@ import {useForm} from 'react-hook-form';
 import {ScreenTemplate, Button} from '../atoms';
 import {colors, margin, fonts} from '../styles/base.js';
 import {Input, DropDown} from '../molecules';
+import {SuccessModal} from '../organisms';
 
 const ID = [
   {
@@ -50,6 +51,7 @@ const ID = [
 ];
 
 const PaymentDetails = ({navigation}) => {
+  const [showModal, setShowModal] = useState(false);
   const url = 'http://www.google.com';
 
   const {
@@ -64,10 +66,24 @@ const PaymentDetails = ({navigation}) => {
   const onContinue = async () => {
     reset();
     await Linking.openURL(url);
+    setShowModal(true);
+  };
+
+  const handleModal = () => {
+    setShowModal(false);
+    navigation.navigate('home');
   };
 
   return (
     <ScreenTemplate>
+      <SuccessModal
+        isVisible={showModal}
+        onSubmit={handleModal}
+        onClose={handleModal}
+        title="¡Transacción Exitosa!"
+        text="El pago se ha realizado con éxito"
+        btnLabel="Continuar"
+      />
       <ScrollView>
         <View style={styles.textContainer}>
           <Icon
