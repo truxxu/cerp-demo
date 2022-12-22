@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useForm} from 'react-hook-form';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {useNavigation} from '@react-navigation/native';
 
 import {colors, margin, padding, fonts} from '../styles/base.js';
 import {Input} from './Input';
@@ -14,6 +15,7 @@ const PayzenCard = ({data}) => {
   const [amount, setAmount] = useState(pagoMin);
   const [isEnabled, setIsEnabled] = useState(false);
   const parsedAmount = parseAmount(amount);
+  const navigation = useNavigation();
 
   const {
     control,
@@ -39,6 +41,12 @@ const PayzenCard = ({data}) => {
 
   const handleCheckbox = () => setIsEnabled(!isEnabled);
 
+  useEffect(() => {
+    return navigation.addListener('focus', () => {
+      setIsEnabled(false);
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       <BouncyCheckbox
@@ -48,6 +56,7 @@ const PayzenCard = ({data}) => {
         text={data.descProd}
         style={styles.header}
         isChecked={isEnabled}
+        disableBuiltInState={true}
       />
       <Input
         name="numProd"

@@ -1,5 +1,6 @@
-import React, {useContext} from 'react';
+import React, {useContext, useCallback} from 'react';
 import {StyleSheet, FlatList, View, Text} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 
 import PRODUCTS from './PayzenProducts.json';
 import {ScreenTemplate} from '../atoms';
@@ -22,6 +23,12 @@ const Products = () => {
   const total = user.selectedProducts.reduce((total, product) => {
     return total + product.amount;
   }, 0);
+
+  useFocusEffect(
+    useCallback(() => {
+      user.clearSelection();
+    }, []),
+  );
 
   return (
     <ScreenTemplate>
