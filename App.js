@@ -15,7 +15,7 @@ import {
   Selection,
   PaymentDetails,
 } from './src/screens';
-import {colors} from './src/styles/base.js';
+import {colors, fonts} from './src/styles/base.js';
 import {UserContext} from './src/context/user-context';
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +25,9 @@ const headerOptions = {
   },
   headerTintColor: colors.primary,
   headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: fonts.primary,
+  },
 };
 
 const App = () => {
