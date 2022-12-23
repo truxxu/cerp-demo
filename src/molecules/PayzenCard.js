@@ -14,15 +14,10 @@ const PayzenCard = ({data}) => {
   const user = useContext(UserContext);
   const [amount, setAmount] = useState(pagoMin);
   const [isEnabled, setIsEnabled] = useState(false);
-  const parsedAmount = parseAmount(amount);
+  const parsedAmount = `$${parseAmount(pagoMin)}`;
   const navigation = useNavigation();
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: {isDirty, isValid},
-  } = useForm({
+  const {control} = useForm({
     mode: 'onChange',
   });
 
@@ -35,8 +30,10 @@ const PayzenCard = ({data}) => {
   }, [isEnabled]);
 
   const handleChange = e => {
-    setAmount(parseInt(e));
-    user.updateProduct(parseInt(e), numProd);
+    if (e > pagoMin / 100) {
+      setAmount(parseInt(e));
+      user.updateProduct(parseInt(e * 100), numProd);
+    }
   };
 
   const handleCheckbox = () => setIsEnabled(!isEnabled);
@@ -68,18 +65,18 @@ const PayzenCard = ({data}) => {
       <Input
         name="pagoMin"
         label="Pago mínimo"
-        keyboard="numeric"
-        control={control}
-        action={handleChange}
-        editable={isEnabled}
         value={parsedAmount}
+        control={control}
+        editable={false}
       />
       <Input
         name="total"
         label="Valor a pagar"
-        value={parsedAmount}
+        keyboard="numeric"
         control={control}
-        editable={false}
+        action={handleChange}
+        editable={isEnabled}
+        placeholder="Ingrese el valor de su pago"
       />
     </View>
   );

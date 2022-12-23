@@ -7,7 +7,6 @@ import {parseAmount} from '../utils/parsing.js';
 
 const TotalBar = ({data, count}) => {
   const navigation = useNavigation();
-  console.log(count);
 
   const onPressHandler = () => {
     navigation.navigate('selection');
